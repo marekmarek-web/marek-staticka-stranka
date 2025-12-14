@@ -3,143 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marek Marek | Finanční partner</title>
+    <title>Finanční Strategie - Roudnice nad Labem</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        primary: '#0f172a', // Tmavě modrá
-                        secondary: '#3b82f6', // Jasně modrá
-                        accent: '#f97316',  // Oranžová
-                        light: '#f0f9ff',   // Pozadí
-                    },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        danger: '#dc2626', // Výrazná červená pro ztrátu
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
                     }
                 }
             }
         }
     </script>
-</head>
-<body class="bg-light text-slate-800 antialiased flex flex-col min-h-screen">
 
-    <!-- NAVIGACE -->
-    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-blue-100 shadow-sm transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-24">
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <!-- Logo M -->
-                    <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center font-bold text-xl shadow-md">M</div>
-                    <div class="flex flex-col">
-                        <span class="text-xl font-bold text-primary leading-none tracking-tight">Marek Marek<span class="text-accent">.</span></span>
-                        <span class="text-xs text-slate-500 font-medium tracking-wide uppercase">Finanční partner</span>
-                    </div>
-                </div>
-                
-                <div class="hidden xl:flex items-center space-x-6 text-sm font-semibold">
-                    <a href="#sluzby" class="text-slate-600 hover:text-primary transition-colors uppercase tracking-wide">Služby</a>
-                    <a href="#omne" class="text-slate-600 hover:text-primary transition-colors uppercase tracking-wide">O mně</a>
-                    <a href="#kariera" class="text-slate-600 hover:text-primary transition-colors uppercase tracking-wide">Kariéra</a>
-                    
-                    <div class="h-4 w-px bg-slate-300 mx-2"></div>
-                    
-                    <a href="#soukromi" class="text-primary hover:text-secondary transition-colors">Soukromí klienti</a>
-                    <a href="#firmy" class="text-primary hover:text-secondary transition-colors">Podnikatelé a firmy</a>
-                    
-                    <a href="#kontakt" class="ml-4 bg-accent text-white hover:bg-orange-600 px-6 py-3 rounded-full font-bold shadow-lg shadow-orange-500/20 transition-all transform hover:-translate-y-0.5">
-                        Kontakt
-                    </a>
-                </div>
-                
-                <div class="xl:hidden flex items-center gap-4">
-                    <a href="#kontakt" class="text-xs font-bold text-white bg-accent px-3 py-2 rounded-full shadow-md">Kontakt</a>
-                    <button id="mobile-menu-btn" class="text-primary focus:outline-none p-2">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <style>
+        .gold-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         
-        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-blue-100 absolute w-full shadow-xl">
-            <div class="px-4 pt-4 pb-6 space-y-2">
-                <a href="#sluzby" class="block py-3 text-base font-medium border-b border-slate-50 text-slate-700 hover:text-primary mobile-link">Služby</a>
-                <a href="#omne" class="block py-3 text-base font-medium border-b border-slate-50 text-slate-700 hover:text-primary mobile-link">O mně</a>
-                <a href="#kariera" class="block py-3 text-base font-medium border-b border-slate-50 text-slate-700 hover:text-primary mobile-link">Kariéra</a>
-                <a href="#soukromi" class="block py-3 text-base font-bold text-primary border-b border-slate-50 mobile-link">Soukromí klienti</a>
-                <a href="#firmy" class="block py-3 text-base font-bold text-primary border-b border-slate-50 mobile-link">Podnikatelé a firmy</a>
-                <a href="#kontakt" class="block py-3 text-base font-bold text-accent mt-4 mobile-link">Kontaktovat</a>
+        .eucs-icon {
+            background: rgba(30, 58, 138, 0.1);
+            border: 1px solid rgba(30, 58, 138, 0.2);
+            color: #1e3a8a;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 0 15px rgba(30, 58, 138, 0.1);
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .primary-cta-style {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            color: #1a202c;
+            font-weight: 800;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-cta-style:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.4);
+        }
+
+        .primary-cta-style::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+
+        .primary-cta-style:hover::after {
+            left: 100%;
+        }
+
+        .secondary-cta-style {
+            color: #3b82f6;
+            font-weight: 600;
+            text-decoration: underline;
+            padding: 1rem 0;
+            display: inline-block;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .secondary-cta-style:hover {
+            color: #1d4ed8;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+    <!-- Navigation (Simplified for focus) -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-black text-slate-900 tracking-tighter">FINANCE<span class="text-gold-500">ROUDNICE</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#problem" class="text-slate-600 hover:text-slate-900 font-medium">Proč ztrácíte</a>
+                    <a href="#reseni" class="text-slate-600 hover:text-slate-900 font-medium">Norské řešení</a>
+                    <a href="#kontakt" class="px-5 py-2 bg-slate-900 text-white rounded-md font-bold hover:bg-slate-800 transition">Kontakt</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SEKCE -->
-    <section class="relative pt-32 pb-16 lg:pt-48 lg:pb-24 bg-gradient-to-br from-slate-900 via-primary to-blue-900 text-white overflow-hidden">
-        <!-- Pozadí: POUZE TEČKY (Vlnky odstraněny) -->
-        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-        
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-gold-400/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Text -->
-                <div class="text-center lg:text-left order-2 lg:order-1">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-800/50 text-blue-200 border border-blue-700 text-xs font-bold uppercase tracking-wider mb-6">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        Středočeský a Ústecký kraj
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- LEVÁ STRANA: TEXT & PSYCHOLOGIE -->
+                <div class="text-left space-y-6">
+                    
+                    <!-- 2. PRINCIP AUTORITY (EUCS) -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-3">
+                        <span class="text-gold-600 font-bold tracking-widest uppercase text-xs sm:text-sm">Strategie Norského Fondu pro Vaše úspory</span>
+                        <div class="eucs-icon">
+                            <i class="fas fa-shield-halved mr-2"></i>
+                            Oficiální Partner EUCS | 99,5% úspěšnost řešení
+                        </div>
                     </div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                        Váš partner pro<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">finanční zdraví.</span>
+
+                    <!-- 1. PRINCIP KONTRASTU A ZTRÁTY (HLAVNÍ NADPIS) -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-[1.15]">
+                        Jistota: Přestaňte <span class="text-danger decoration-4 underline-offset-4 decoration-danger/30 underline">ztrácet</span> na inflaci. <br/>
+                        Začněte <span class="gold-gradient">vydělávat</span>.
                     </h1>
-                    <p class="text-lg text-blue-100 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                        Jsem Marek Marek. Pomáhám firmám i jednotlivcům nastavit finance tak, aby dávaly ekonomický i lidský smysl. Dám vašim penězům řád a plán.
+
+                    <!-- POPIS (BOLEST) -->
+                    <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+                        Průměrná česká rodina každoročně <strong class="text-danger">ztrácí desetitisíce</strong> kvůli špatnému nastavení smluv a skrytým poplatkům. Ukažte mi Váš aktuální stav a já Vám bezplatně odhalím, kudy Vaše peníze mizí pryč.
                     </p>
-                    
-                    <!-- Čísla z letáku -->
-                    <div class="grid grid-cols-3 gap-4 mb-8 border-t border-white/10 pt-6">
-                        <div>
-                            <p class="text-2xl font-bold text-white">250+</p>
-                            <p class="text-xs text-blue-300 uppercase tracking-wide">Klientů</p>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold text-white">10 let</p>
-                            <p class="text-xs text-blue-300 uppercase tracking-wide">Zkušeností</p>
-                        </div>
-                        <div>
-                            <p class="text-2xl font-bold text-white">135 mil.</p>
-                            <p class="text-xs text-blue-300 uppercase tracking-wide">V portfoliích</p>
-                        </div>
+
+                    <!-- CTA TLAČÍTKA (SCARCITY & URGENCY) -->
+                    <div class="flex flex-col sm:items-start gap-4 pt-4">
+                        <!-- 3. Primární CTA - Scarcity -->
+                        <a href="#kontakt" class="primary-cta-style w-full sm:w-auto group">
+                            <div class="flex items-center justify-center sm:justify-start">
+                                <span>Využijte 1 z 5 volných termínů <span class="bg-white text-gold-600 px-1 rounded mx-1">ZDARMA</span> tento měsíc</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                            <div class="text-[0.65rem] font-medium opacity-80 mt-1 normal-case tracking-normal">
+                                * Nezávazná konzultace v hodnotě 2.500 Kč
+                            </div>
+                        </a>
+                        
+                        <!-- 3. Sekundární CTA - Risk Avoidance -->
+                        <a href="#eucs" class="secondary-cta-style group">
+                            <span class="flex items-center">
+                                <i class="fas fa-exclamation-circle text-danger mr-2 group-hover:animate-bounce"></i>
+                                Nežijte v riziku: Okamžitá kontrola smluv (Jen pro Roudnici a okolí)
+                            </span>
+                        </a>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#kontakt" class="px-8 py-4 bg-accent hover:bg-orange-600 text-white font-bold rounded-lg transition shadow-lg shadow-orange-500/30 text-center flex items-center justify-center gap-2">
-                            Sjednat schůzku <i class="fas fa-calendar-check"></i>
-                        </a>
-                        <a href="#sluzby" class="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold rounded-lg transition backdrop-blur-sm text-center">
-                            Moje služby
-                        </a>
+                    <!-- Social Proof / Trust Indicators -->
+                    <div class="pt-8 flex items-center gap-6 text-slate-400 text-sm font-medium border-t border-slate-200 mt-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Bezpečí (ČNB)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Likvidita</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-500"></i>
+                            <span>Norská garance</span>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Fotka -->
-                <div class="relative order-1 lg:order-2 flex justify-center">
-                    <div class="relative z-10 w-full max-w-md mx-auto">
-                        <div class="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 bg-slate-800">
-                            <!-- ZDE JE ODKAZ NA VAŠI FOTKU -->
-                            <img src="marekuvodni.png.png" alt="Marek Marek - Finanční poradce" class="w-full h-full">
-                            <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent"></div>
-                            <div class="absolute bottom-6 left-6 text-left">
-                                <p class="text-white font-bold text-xl">Marek Marek</p>
-                                <p class="text-accent text-sm font-medium">10 let praxe v oboru</p>
+
+                <!-- PRAVÁ STRANA: VIZUÁLNÍ DŮKAZ (GRAF) -->
+                <div class="relative w-full max-w-lg mx-auto lg:max-w-none">
+                    <!-- Karta grafu -->
+                    <div class="bg-white rounded-2xl shadow-2xl shadow-slate-200/50 p-6 border border-slate-100 relative animate-float">
+                        
+                        <!-- Floating Badges on Chart -->
+                        <div class="absolute -top-4 -right-4 bg-red-100 text-red-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm z-10">
+                            <i class="fas fa-arrow-trend-down mr-1"></i> Inflace bere 12%+
+                        </div>
+                        <div class="absolute -bottom-4 -left-4 bg-gold-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-bold shadow-sm z-10 border border-gold-200">
+                            <i class="fas fa-coins mr-1"></i> Renta z majetku
+                        </div>
+
+                        <!-- Nadpis Grafu -->
+                        <div class="mb-6 border-b border-slate-100 pb-4">
+                            <h3 class="text-lg font-bold text-slate-800">Projekce Vašeho majetku (10 let)</h3>
+                            <p class="text-xs text-slate-500">Rozdíl mezi běžným bankovním produktem a naší strategií</p>
+                        </div>
+
+                        <!-- Canvas pro Chart.js -->
+                        <div class="relative h-64 w-full">
+                            <canvas id="wealthChart"></canvas>
+                        </div>
+                        
+                        <!-- Legenda pod grafem pro jasnost -->
+                        <div class="mt-4 grid grid-cols-2 gap-4 text-center text-xs">
+                            <div class="bg-slate-50 p-2 rounded text-slate-500">
+                                <span class="block text-red-500 font-bold text-lg">- 420.000 Kč</span>
+                                Ztráta příležitosti
+                            </div>
+                            <div class="bg-gold-50 p-2 rounded text-yellow-800 border border-gold-200">
+                                <span class="block font-bold text-lg">+ Pasivní příjem</span>
+                                Váš cíl
                             </div>
                         </div>
                     </div>
@@ -148,127 +270,136 @@
         </div>
     </section>
 
-    <!-- SEKCE: FIRMY (Podle letáku, bez dekorací) -->
-    <section id="firmy" class="py-20 bg-white border-b border-slate-100 relative overflow-hidden">
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col md:flex-row gap-12 items-start">
-                
-                <!-- Levá část -->
-                <div class="md:w-5/12">
-                    <div class="inline-block bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold border border-primary/20 mb-6 shadow-md tracking-wide">
-                        <i class="fas fa-building mr-2 text-accent"></i> NOVÁ CESTA PRO VAŠI FIRMU
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6 leading-tight">
-                        Váš partner pro <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">finanční zdraví</span> firmy.
-                    </h2>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-8">
-                        Většina firem má "něco sjednaného", ale 9 z 10 to má nastavené neefektivně. Pomáhám firmám a jednatelům nastavit benefity a zajištění tak, aby to dávalo smysl.
-                    </p>
-                    
-                    <!-- Reference -->
-                    <p class="text-sm text-slate-400 font-bold uppercase mb-3">Spolupracuji například s:</p>
-                    <div class="flex flex-wrap gap-4 opacity-70">
-                        <span class="px-3 py-1 border rounded text-slate-600 font-bold text-xs">DŘEVOVKUS</span>
-                        <span class="px-3 py-1 border rounded text-slate-600 font-bold text-xs">REXPOINT</span>
-                        <span class="px-3 py-1 border rounded text-slate-600 font-bold text-xs">STŘECHY ŘEZNÍČEK</span>
-                        <span class="px-3 py-1 border rounded text-slate-600 font-bold text-xs">MARCO LUCKA</span>
-                    </div>
-                </div>
-
-                <!-- Pravá část: Benefity -->
-                <div class="md:w-7/12 grid grid-cols-1 gap-6">
-                    <!-- Karta 1 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow flex gap-4 items-start group">
-                        <div class="w-12 h-12 bg-blue-50 text-secondary rounded-xl flex items-center justify-center text-2xl group-hover:bg-secondary group-hover:text-white transition-colors shrink-0">
-                            <i class="fas fa-coins"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary mb-2">Zaměstnanecké benefity</h3>
-                            <p class="text-slate-600 text-sm mb-2">Využití 100 % toho, co nabízí stát. Nebudete platit odvody a daně tam, kde to není potřeba.</p>
-                            <div class="flex flex-wrap gap-2 mt-3">
-                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">DIP</span>
-                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">DPS</span>
-                                <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded">Životní pojištění</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Karta 2 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow flex gap-4 items-start group">
-                        <div class="w-12 h-12 bg-blue-50 text-secondary rounded-xl flex items-center justify-center text-2xl group-hover:bg-secondary group-hover:text-white transition-colors shrink-0">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary mb-2">Odpovědnost za firmu</h3>
-                            <p class="text-slate-600 text-sm">Každá firma má pojištění, ne každá firma ho má však nastavenou řádně. Máte ji nastavenou řádně vy?</p>
-                        </div>
-                    </div>
-
-                    <!-- Karta 3 -->
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-lg hover:shadow-xl transition-shadow flex gap-4 items-start group">
-                        <div class="w-12 h-12 bg-blue-50 text-secondary rounded-xl flex items-center justify-center text-2xl group-hover:bg-secondary group-hover:text-white transition-colors shrink-0">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-primary mb-2">Plánování rozvoje</h3>
-                            <p class="text-slate-600 text-sm">Vše začalo nápadem, který přešel v plán. Bez dobrého finančního plánu se to neobejde.</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- Placeholder Section for Anchor Linking -->
+    <section id="kontakt" class="py-20 bg-slate-50">
+        <div class="max-w-3xl mx-auto text-center px-4">
+            <h2 class="text-3xl font-bold mb-4">Máte zájem o bezplatnou analýzu?</h2>
+            <p class="text-slate-600 mb-8">Jste právě v sekci, kam odkazuje hlavní tlačítko.</p>
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <p class="text-gray-400 italic">Zde by byl kontaktní formulář (Calendly embed).</p>
             </div>
         </div>
     </section>
-
-    <!-- PATIČKA -->
-    <footer id="kontakt" class="mt-auto py-12 bg-slate-900 text-slate-400 text-sm border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Marek Marek</h3>
-                    <p class="mb-4">Váš partner pro finanční zdraví.</p>
-                    <div class="flex items-center gap-3">
-                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-facebook fa-lg"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-linkedin fa-lg"></i></a>
-                        <a href="#" class="text-slate-400 hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Kontakt</h3>
-                    <p class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-accent"></i> Jana z Dražic 99, Roudnice n. L.</p>
-                    <p class="mb-2"><a href="mailto:kontakt@marek-marek.cz" class="hover:text-white"><i class="fas fa-envelope mr-2 text-accent"></i> kontakt@marek-marek.cz</a></p>
-                    <p class="mb-2"><a href="tel:+420778511166" class="hover:text-white"><i class="fas fa-phone mr-2 text-accent"></i> +420 778 511 166</a></p>
-                </div>
-                <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Rychlé odkazy</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#sluzby" class="hover:text-accent">Služby</a></li>
-                        <li><a href="#firmy" class="hover:text-accent">Pro firmy</a></li>
-                        <li><a href="#soukromi" class="hover:text-accent">Soukromí klienti</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-xs">
-                <p>&copy; 2025 Marek Marek. Všechna práva vyhrazena.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
+        // 4. VIZUÁLNÍ DŮKAZ - Chart.js Konfigurace
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('wealthChart').getContext('2d');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
+            // Data simulace
+            const labels = ['Start', '2 roky', '4 roky', '6 let', '8 let', '10 let'];
+            
+            // Průměr / Ztráta (Lineární, pomalý růst, pod inflací)
+            const averageData = [500000, 510000, 520000, 530000, 540000, 550000];
+            
+            // Vlastní Strategie (Složené úročení, exponenciální)
+            const strategyData = [500000, 580000, 690000, 820000, 980000, 1200000];
 
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Vaše strategie (s Norskou logikou)', // ZISK
+                            data: strategyData,
+                            borderColor: '#fcd34d', // Žlutá/Zlatá
+                            backgroundColor: (context) => {
+                                const ctx = context.chart.ctx;
+                                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                                gradient.addColorStop(0, 'rgba(252, 211, 77, 0.4)');
+                                gradient.addColorStop(1, 'rgba(252, 211, 77, 0.0)');
+                                return gradient;
+                            },
+                            borderWidth: 4,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#f59e0b',
+                            pointRadius: 5,
+                            pointHoverRadius: 7,
+                            fill: true,
+                            tension: 0.4 // Hladká křivka
+                        },
+                        {
+                            label: 'Průměrný výnos ČR', // ZTRÁTA
+                            data: averageData,
+                            borderColor: '#dc2626', // Červená pro ztrátu/varování
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            borderDash: [5, 5], // Přerušovaná čára značí "slabost"
+                            pointBackgroundColor: '#dc2626',
+                            pointRadius: 3,
+                            fill: false,
+                            tension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                usePointStyle: true,
+                                boxWidth: 8,
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 11
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            titleFont: { family: "'Inter', sans-serif", size: 13 },
+                            bodyFont: { family: "'Inter', sans-serif", size: 12 },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += new Intl.NumberFormat('cs-CZ', { style: 'currency', currency: 'CZK', maximumSignificantDigits: 3 }).format(context.parsed.y);
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#f1f5f9',
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                font: { size: 10 },
+                                color: '#94a3b8',
+                                callback: function(value) {
+                                    return value / 1000 + 'k';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: { size: 10 },
+                                color: '#94a3b8'
+                            }
+                        }
+                    }
+                }
             });
         });
     </script>
 </body>
 </html>
-
