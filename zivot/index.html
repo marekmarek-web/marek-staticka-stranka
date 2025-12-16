@@ -25,8 +25,6 @@ import {
   Linkedin,
   Instagram,
   MessageCircle,
-  Sparkles, // Added for AI feature
-  Bot       // Added for AI feature
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -56,11 +54,6 @@ const InsuranceCalculator = () => {
   const [contactForm, setContactForm] = useState({ email: '', phone: '' });
   const [formStatus, setFormStatus] = useState('idle'); // idle | submitting | success
   
-  // State pro AI MODAL
-  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
-  const [aiResponse, setAiResponse] = useState('');
-  const [isAiLoading, setIsAiLoading] = useState(false);
-
   // State pro FAQ
   const [openFaq, setOpenFaq] = useState(null);
   
@@ -274,68 +267,10 @@ const InsuranceCalculator = () => {
       setOpenFaq(openFaq === index ? null : index);
   };
   
-  // --- GEMINI AI HANDLER ---
-  const generateAiAnalysis = async () => {
-    setIsAiModalOpen(true);
-    // Pokud již máme odpověď a vstupy se nezměnily zásadně (pro jednoduchost generujeme vždy při kliknutí pro "fresh" feel, nebo kontrola prázdnosti)
-    setIsAiLoading(true);
-    setAiResponse('');
-    
-    // API KEY PLACEHOLDER: Prosím, vložte Váš klíč pro produkční použití.
-    const apiKey = "AIzaSyC9x_JW7SZaOt-TaC9FCc0Gwz7V0ukp-HY"; 
-    
-    const prompt = `
-      Jsem finanční poradce (Marek Marek). Mám klienta s těmito parametry:
-      - Věk: ${age} let
-      - Čistý měsíční příjem: ${netIncome} Kč
-      - Měsíční výdaje: ${expenses} Kč
-      - Závazky (hypotéka atd.): ${liabilities} Kč
-      - Finanční rezervy: ${reserves} Kč
-      - Rodina: ${children} dětí, ${hasSpouse ? 's manželem/manželkou' : 'single'}
-      
-      Kalkulačka pro něj spočítala tato doporučená krytí:
-      - Smrt: ${deathCoverage} Kč (pro zajištění rodiny a splacení závazků)
-      - Invalidita: ${capitalD3} Kč (pro generování renty a krytí výpadku příjmu)
-      - Pracovní neschopnost: ${pnDailyNeed} Kč/den (pro krátkodobý výpadek)
-      
-      Tvým úkolem je napsat pro tohoto klienta stručné, přátelské a personalizované shrnutí (max 3-4 odstavce) v češtině.
-      1. Zhodnoť jeho situaci (např. poměr rezerv k závazkům, zabezpečení dětí).
-      2. Vysvětli jednoduše, proč mu vyšla taková částka na invaliditu nebo smrt (vazba na rentu/závazky).
-      3. Přidej jedno "finanční moudro" nebo upozornění specifické pro jeho situaci (např. inflace, čekací doby). Vždy zdůrazni, že přesné nastavení je nutné prokonzultovat, aby nedostal nedostatečné krytí/špatnou smlouvu, a nesmí si to sjednat sám online bez konzultace.
-      
-      Formátuj výstup pomocí jednoduchého HTML (použij <p>, <strong>, <ul>, <li>). Nepoužívej markdown bloky. Buď konkrétní a empatický.
-    `;
+  // --- FUNKCE AI asistenta zcela odstraněna ---
 
-    try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: prompt }]
-                }]
-            })
-        });
-        
-        const data = await response.json();
-        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Omlouváme se, AI analýzu se nepodařilo vygenerovat. Zkuste to prosím později.";
-        
-        // Simple cleanup of markdown code blocks if Gemini sends them
-        const cleanText = text.replace(/```html/g, '').replace(/```/g, '');
-        setAiResponse(cleanText);
-    } catch (error) {
-        console.error("AI Error:", error);
-        setAiResponse("<p>Omlouváme se, došlo k chybě při spojení s AI asistentem. Zkuste to prosím za chvíli.</p>");
-    } finally {
-        setIsAiLoading(false);
-    }
-  };
-
-  const closeAiModal = () => {
-      setIsAiModalOpen(false);
-  };
+  // Ponechána prázdná funkce, aby se nerozbilo volání z JSX, které je nyní také odstraněno.
+  const generateAiAnalysis = () => {};
 
 
   return (
@@ -493,7 +428,7 @@ const InsuranceCalculator = () => {
                         <a href="/investice/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50">
                             <TrendingUp className="w-5 h-5 text-[#0B3A7A] mr-3" /> Investiční kalkulačka
                         </a>
-                        <a href="#top" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50">
+                        <a href="/zivot/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50">
                             <HeartPulse className="w-5 h-5 text-red-500 mr-3" /> Kalkulačka životního pojištění
                         </a>
                     </div>
@@ -814,14 +749,14 @@ const InsuranceCalculator = () => {
                                 </div>
                             </div>
                             
-                            {/* AI BUTTON */}
-                            <button 
+                            {/* AI BUTTON (ODSTRANĚNO) */}
+                            {/* <button 
                                 onClick={generateAiAnalysis}
                                 className="w-full mt-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-3 group"
                             >
                                 <Sparkles className="w-5 h-5 text-yellow-300 animate-pulse" />
                                 <span>AI Analýza situace</span>
-                            </button>
+                            </button> */}
 
                         </div>
 
@@ -1004,51 +939,9 @@ const InsuranceCalculator = () => {
       </footer>
       {/* --- FOOTER (KONEC) --- */}
 
-      {/* AI MODAL */}
-      {isAiModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-[#0a0f29]/80 backdrop-blur-sm" onClick={closeAiModal}></div>
-          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg relative z-10 overflow-hidden animate-[fadeIn_0.3s_ease-out]">
-            
-            {/* Header */}
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 flex justify-between items-center text-white">
-              <div className="flex items-center gap-3">
-                  <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
-                      <Sparkles className="w-6 h-6 text-yellow-300" />
-                  </div>
-                  <div>
-                      <h3 className="text-xl font-bold">AI Finanční Asistent</h3>
-                      <p className="text-xs text-indigo-100 opacity-80">Powered by Gemini</p>
-                  </div>
-              </div>
-              <button onClick={closeAiModal} className="text-white/80 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Body */}
-            <div className="p-6 max-h-[70vh] overflow-y-auto">
-              {isAiLoading ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <div className="w-16 h-16 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin mb-6"></div>
-                      <h4 className="text-lg font-bold text-slate-800 mb-2">Analyzuji vaši situaci...</h4>
-                      <p className="text-sm text-slate-500 max-w-xs">Prosím strpení, AI právě počítá rizika a připravuje doporučení.</p>
-                  </div>
-              ) : (
-                  <div className="ai-content text-slate-700 text-sm md:text-base leading-relaxed" dangerouslySetInnerHTML={{__html: aiResponse}}></div>
-              )}
-            </div>
-
-            {/* Footer */}
-            <div className="bg-slate-50 p-4 border-t border-slate-100 flex justify-end">
-                <button onClick={closeAiModal} className="text-slate-600 font-bold hover:text-indigo-600 text-sm px-4 py-2">
-                    Zavřít
-                </button>
-            </div>
-          </div>
-        </div>
-      )}
-
+      {/* AI MODAL (ODSTRANĚNO) */}
+      {/* Veškerá logika a UI spojená s AI asistentem byla odstraněna. */}
+      
       {/* MODAL PRO KONTROLU SMLOUVY / POPTÁVKU */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
