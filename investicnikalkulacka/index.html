@@ -127,69 +127,95 @@
             -webkit-appearance: none; 
             margin: 0; 
         }
+
+        /* ========================================= */
+        /* KOMPLETNÍ OPRAVA SEKCE PARTNEŘI           */
+        /* ========================================= */
+        @keyframes scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); } /* Posun o polovinu délky pro nekonečnou smyčku */
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px !important;
+            min-width: 150px; /* Základní šířka buňky */
+            margin: 0 30px !important; /* Mezery na PC */
+        }
+
+        .partner-logo img {
+            max-height: 70px !important;
+            max-width: 180px !important;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .animate-scroll {
+            width: max-content !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            animation: scroll 40s linear infinite !important;
+        }
+
+        @media (max-width: 768px) {
+            .animate-scroll {
+                animation-duration: 20s !important; /* Vyšší rychlost na mobilu */
+            }
+
+            .partner-logo {
+                min-width: 120px !important; /* Menší buňka pro mobil */
+                margin: 0 10px !important;   /* Menší mezery pro mobil */
+            }
+
+            .animate-scroll.gap-12 {
+                gap: 1rem !important; /* Zmenšení Tailwind gap na mobilu */
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
         
-/* ========================================= */
-/* NOVÉ STYLY PRO LOGA PARTNERŮ */
-/* ========================================= */
+        /* Specific styling for the FAQ cards */
+        .faq-card {
+            border: 1px solid #D6E6FF; /* brand-border */
+            background-color: #ffffff;
+            transition: box-shadow 0.3s;
+        }
+        .faq-card:hover {
+            box-shadow: 0 4px 12px rgba(11, 58, 122, 0.1);
+        }
 
-/* 1. Vzhled jednotlivých log */
-.partner-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 120px !important;
-    margin: 15px !important;
-    min-width: 150px;
-}
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #0B3A7A; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #082855; }
 
-.partner-logo img {
-    max-height: 80px !important;
-    max-width: 200px !important;
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
-
-.partner-logo img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* ========================================= */
-/* FINÁLNÍ OPRAVA POSUVNÍKU (ANIMACE) */
-/* ========================================= */
-
-/* 2. Definice pohybu */
-@keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); } 
-} 
-
-/* 3. Nastavení pásu (VŠECHNA ZAŘÍZENÍ) */
-.animate-scroll {
-    /* TOHLE JE KLÍČOVÉ: Roztáhne pás podle obsahu = konec sekání */
-    width: max-content !important; 
-    display: flex !important;
-    flex-wrap: nowrap !important; 
-    
-    /* Základní čas pro PC */
-    animation: scroll 40s linear infinite !important;
-}
-
-/* 4. Specifické nastavení pro MOBIL */
-@media (max-width: 768px) {
-    .animate-scroll {
-        /* Čas pro mobil - 20s je ideál pro plynulost */
-<div class="flex animate-scroll min-w-full items-center gap-8" style="animation-duration: 12s !important; width: max-content !important; display: flex !important;">
-    }
-    
-    .partner-logo {
-        margin: 0 15px !important;
-    }
-}
+        /* LOGO STYLY HEADER */
+        .logo-img-style {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: invert(1);
+            transition: filter 0.3s, transform 0.3s;
+        }
+        .glass-header-scrolled #logo-img-container .logo-img-style {
+            filter: invert(0);
+        }
     </style>
 </head>
 <body class="bg-white font-sans text-slate-800 antialiased overflow-x-hidden">
