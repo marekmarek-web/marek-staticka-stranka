@@ -124,42 +124,39 @@
         }
 
         /* ========================================= */
-        /* FIX NEKONEČNÉHO PÁSU (SÍLA) */
+        /* FIX NEKONEČNÉHO PÁSU (ULTIMATE VERZE) */
         /* ========================================= */
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Posun o polovinu celkové délky */
+            100% { transform: translateX(-50%); } /* Posouváme o 50%, protože máme 4 sady log (2+2) */
         }
 
         .animate-scroll {
-            /* TOTO JE KLÍČOVÉ: Donutí pás, aby byl extrémně dlouhý (podle obsahu) */
-            width: max-content !important; 
-            min-width: 100%; /* Pojistka */
+            /* Vynucení šířky podle obsahu */
+            width: max-content !important;
+            min-width: 200%; /* Pojistka: musí být širší než obrazovka */
             
             display: flex !important;
-            flex-wrap: nowrap !important; /* Zákaz zalamování */
+            flex-wrap: nowrap !important;
             align-items: center;
+            gap: 0 !important;
             
-            /* Zrušíme mezery v kontejneru a budeme je dělat jen marginem u log */
-            gap: 0 !important; 
+            /* Optimalizace pro mobily - drží to v paměti GPU */
+            will-change: transform; 
             
-            /* Rychlost pro PC - 40s je plynulé */
-            animation: scroll 40s linear infinite !important;
+            /* Základní rychlost PC */
+            animation: scroll 60s linear infinite !important; /* Delší čas, protože pás je teď 4x delší */
         }
 
-        /* Nastavení log */
         .partner-logo {
-            flex-shrink: 0 !important; /* Zákaz zmenšování log */
+            flex-shrink: 0 !important;
             width: auto;
-            /* Tady děláme mezery (PC verze) */
-            margin: 0 30px !important; 
-            
-            /* Vzhled */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100px !important;
+            margin: 0 40px !important; /* Větší mezera na PC */
         }
 
         .partner-logo img {
@@ -170,6 +167,9 @@
             filter: grayscale(100%);
             opacity: 0.8;
             transition: all 0.3s ease;
+            /* Zákaz výběru obrázku, aby se nerozbilo tahání prstem */
+            user-select: none; 
+            -webkit-user-drag: none;
         }
 
         .partner-logo img:hover {
@@ -181,18 +181,18 @@
         /* MOBILNÍ NASTAVENÍ */
         @media (max-width: 768px) {
             .animate-scroll {
-                /* Rychlost pro mobil (12s = fofr) */
-                animation-duration: 12s !important; 
+                /* Rychlost pro mobil (15-20s je teď ideál, když je pás 4x delší) */
+                animation-duration: 20s !important; 
             }
             
             .partner-logo {
-                /* Na mobilu menší mezery a menší loga */
+                /* Na mobilu menší mezery a loga */
                 margin: 0 15px !important; 
                 min-width: 120px !important;
             }
             
             .partner-logo img {
-                max-height: 50px !important; /* Trochu menší na mobilu */
+                max-height: 55px !important;
             }
         }
 
@@ -629,11 +629,12 @@
                     </div>
                 </div>
 
-                <!-- PARTNEŘI / LOGA (OPRAVENÁ SEKCE) -->
+                <!-- PARTNEŘI / LOGA (OPRAVENÁ SEKCE S 4 NÁSOBNOU DUPLIKACÍ) -->
                 <div class="mt-24 pt-10 border-t border-brand-border/50 overflow-hidden marquee-container relative opacity-80 hover:opacity-100 transition-opacity lg:col-span-12">
                     <div class="flex whitespace-nowrap overflow-hidden py-4">
                         <div class="animate-scroll">
                             
+                            <!-- SADA 1 -->
                             <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
                             <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
                             <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
@@ -642,7 +643,25 @@
                             <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
                             <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
                             
-                            <!-- DUPLIKÁTY PRO SMYČKU -->
+                            <!-- SADA 2 (Duplikát) -->
+                            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+                            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+                            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+                            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+                            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+                            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+                            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
+
+                            <!-- SADA 3 (Pojistka pro široké monitory a mobily) -->
+                            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+                            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+                            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+                            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+                            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+                            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+                            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
+
+                            <!-- SADA 4 (Pojistka pro ultra-široké monitory) -->
                             <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
                             <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
                             <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
