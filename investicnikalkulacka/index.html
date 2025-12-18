@@ -128,61 +128,74 @@
             margin: 0; 
         }
 
-        /* ========================================= */
-        /* KOMPLETNÍ OPRAVA SEKCE PARTNEŘI           */
-        /* ========================================= */
-        @keyframes scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); } /* Posun o polovinu délky pro nekonečnou smyčku */
-        }
+/* ========================================= */
+/* FIX NEKONEČNÉHO PÁSU (SÍLA) */
+/* ========================================= */
 
-        .partner-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px !important;
-            min-width: 150px; /* Základní šířka buňky */
-            margin: 0 30px !important; /* Mezery na PC */
-        }
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Posun o polovinu celkové délky */
+}
 
-        .partner-logo img {
-            max-height: 70px !important;
-            max-width: 180px !important;
-            width: auto;
-            object-fit: contain;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
+.animate-scroll {
+    /* TOTO JE KLÍČOVÉ: Donutí pás, aby byl extrémně dlouhý (podle obsahu) */
+    width: max-content !important; 
+    min-width: 100%; /* Pojistka */
+    
+    display: flex !important;
+    flex-wrap: nowrap !important; /* Zákaz zalamování */
+    align-items: center;
+    
+    /* Zrušíme mezery v kontejneru a budeme je dělat jen marginem u log */
+    gap: 0 !important; 
+    
+    /* Rychlost pro PC */
+    animation: scroll 40s linear infinite !important;
+}
 
-        .partner-logo img:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.1);
-        }
+/* Nastavení log */
+.partner-logo {
+    flex-shrink: 0 !important; /* Zákaz zmenšování log */
+    width: auto;
+    /* Tady děláme mezery (PC verze) */
+    margin: 0 30px !important; 
+    
+    /* Vzhled */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px !important;
+}
 
-        .animate-scroll {
-            width: max-content !important;
-            display: flex !important;
-            flex-wrap: nowrap !important;
-            animation: scroll 40s linear infinite !important;
-        }
+.partner-logo img {
+    max-height: 70px !important;
+    max-width: 180px !important;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
 
-        @media (max-width: 768px) {
-            .animate-scroll {
-                animation-duration: 20s !important; /* Vyšší rychlost na mobilu */
-            }
+.partner-logo img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
 
-            .partner-logo {
-                min-width: 120px !important; /* Menší buňka pro mobil */
-                margin: 0 10px !important;   /* Menší mezery pro mobil */
-            }
-
-            .animate-scroll.gap-12 {
-                gap: 1rem !important; /* Zmenšení Tailwind gap na mobilu */
-            }
-        }
-
+/* MOBILNÍ NASTAVENÍ */
+@media (max-width: 768px) {
+    .animate-scroll {
+        /* Rychlost pro mobil (10s = fofr) */
+        animation-duration: 10s !important; 
+    }
+    
+    .partner-logo {
+        /* Na mobilu menší mezery */
+        margin: 0 15px !important; 
+        min-width: 120px !important;
+    }
+}
         .chart-container {
             position: relative;
             height: 300px;
@@ -617,64 +630,24 @@
 
                 <!-- PARTNEŘI / LOGA -->
 <div class="mt-24 pt-10 border-t border-brand-border/50 overflow-hidden marquee-container relative opacity-80 hover:opacity-100 transition-opacity lg:col-span-12">
-    <div class="flex whitespace-nowrap overflow-hidden py-4" style="height: 120px; align-items: center;"> 
-        <div class="flex animate-scroll min-w-full items-center justify-around gap-12">
+    <div class="flex whitespace-nowrap overflow-hidden py-4">
+        <div class="flex animate-scroll items-center">
             
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/creif-logo.png" alt="Creif" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/amundi-logo.png" alt="Amundi" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/edward-logo.png" alt="Edward" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/investika-logo.png" alt="Investika" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/avant-logo.png" alt="Avant" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/conseq-logo.png" alt="Conseq" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/cyrrus-logo.png" alt="Cyrrus" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/creif-logo.png" alt="Creif" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/amundi-logo.png" alt="Amundi" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/edward-logo.png" alt="Edward" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/investika-logo.png" alt="Investika" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/avant-logo.png" alt="Avant" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/conseq-logo.png" alt="Conseq" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
-
-            <div class="partner-logo" style="min-width: 180px; display: flex; justify-content: center;">
-                <img src="/images/cyrrus-logo.png" alt="Cyrrus" style="height: 70px !important; width: auto !important; max-width: 100%;">
-            </div>
+            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
+            
+            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
 
         </div>
     </div>
