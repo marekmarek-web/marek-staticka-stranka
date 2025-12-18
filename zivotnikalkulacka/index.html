@@ -179,10 +179,10 @@
         <div class="max-w-7xl mx-auto">
             
             <!-- HERO CONTAINER START -->
-            <!-- UPRAVENO: p-6 pro mobil (místo p-8), md:p-12 pro desktop -->
-            <div class="relative rounded-3xl mb-10 min-h-[400px] flex flex-col justify-center shadow-2xl overflow-hidden">
+            <!-- OPRAVA: Odstraněno overflow-hidden, aby se ořezávalo jen pozadí, ale tooltipy mohly přetékat -->
+            <div class="relative rounded-3xl mb-10 min-h-[400px] flex flex-col justify-center shadow-2xl">
                  
-                 <!-- 1. Vrstva: POZADÍ (Zde přidáno overflow-hidden pro ořezání blobů) -->
+                 <!-- 1. Vrstva: POZADÍ (Zde zachováno overflow-hidden pro ořezání blobů) -->
                  <div class="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none hero-decoration">
                      <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f29] to-[#1e3a6e]"></div>
                      <!-- Background Blob -->
@@ -499,6 +499,8 @@
         let isMobileMenuOpen = false;
         let isScrolled = false;
         let fileName = null; // Přidáno globálně pro opravu chyby
+        // NOVÉ: Globální objekt pro uložení výsledků výpočtu (pro odeslání emailem)
+        let currentResults = {};
         
         const MIN_INCOME = 15000;
         const MAX_INCOME = 250000;
@@ -602,6 +604,15 @@
             let tnBase = 1000000;
             if (netIncome > 100000) tnBase = 3000000;
             else if (netIncome > 30000) tnBase = 2000000;
+
+            // Uložení výsledků do globální proměnné pro použití ve formuláři
+            currentResults = {
+                deathCoverage,
+                capitalD3,
+                pnDailyNeed,
+                tnBase,
+                tnProgression: tnBase * 10
+            };
 
             renderResults({
                 deathCoverage,
@@ -786,7 +797,7 @@
                                     <div class="w-full bg-[#cbd5e1] rounded-b-lg transition-all duration-500 ease-out" style="height: ${statHeight}%"></div>
                                 </div>
                                 <div class="text-xs font-bold text-slate-600 mt-2">${item.label}</div>
-                                <div class="text-[10px] text-slate-400">${formatCurrency(item.prijem)} Kč</div>
+                                <div class="text-xs text-slate-400">${formatCurrency(item.prijem)} Kč</div>
                             </div>
                         `;
                     }).join('')}
@@ -872,19 +883,25 @@
                         </div>
 
                         <div class="p-6">
-                            <form id="contact-form" action="https://formspree.io/f/xqezzzpe" method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); handleFormSubmit(event)">
+                            <form id="contact-form" action="https://formsubmit.co/ajax/kontakt@marek-marek.cz" method="POST" enctype="multipart/form-data" onsubmit="handleFormSubmit(event)">
                                 <!-- Hidden inputs for Formspree -->
                                 <input type="hidden" name="_subject" value="Nový lead: ${title}">
                                 <input type="hidden" name="_captcha" value="false">
                                 
-                                <!-- Hidden inputs with calculator values -->
-                                <input type="hidden" name="vek" value="${age}">
-                                <input type="hidden" name="prijem" value="${netIncome}">
-                                <input type="hidden" name="vydaje" value="${expenses}">
-                                <input type="hidden" name="zavazky" value="${liabilities}">
-                                <input type="hidden" name="rezervy" value="${reserves}">
-                                <input type="hidden" name="deti" value="${children}">
-                                <input type="hidden" name="manzelstvi" value="${hasSpouse ? 'Ano' : 'Ne'}">
+                                <!-- Hidden inputs with calculator values (INPUTY) -->
+                                <input type="hidden" name="Vstup_Vek" value="${age}">
+                                <input type="hidden" name="Vstup_Prijem" value="${netIncome}">
+                                <input type="hidden" name="Vstup_Vydaje" value="${expenses}">
+                                <input type="hidden" name="Vstup_Zavazky" value="${liabilities}">
+                                <input type="hidden" name="Vstup_Rezervy" value="${reserves}">
+                                <input type="hidden" name="Vstup_Deti" value="${children}">
+                                <input type="hidden" name="Vstup_Manzelstvi" value="${hasSpouse ? 'Ano' : 'Ne'}">
+
+                                <!-- Hidden inputs with calculated results (VYSTUPY - NOVÉ) -->
+                                <input type="hidden" name="Vystup_Smrt_Kryti" value="${formatCurrency(currentResults.deathCoverage)}">
+                                <input type="hidden" name="Vystup_Invalidita_Kryti" value="${formatCurrency(currentResults.capitalD3)}">
+                                <input type="hidden" name="Vystup_PN_Den" value="${formatCurrency(currentResults.pnDailyNeed)}">
+                                <input type="hidden" name="Vystup_TN_Zaklad" value="${formatCurrency(currentResults.tnBase)}">
 
                                 <div class="space-y-4">
                                     <div>
@@ -913,7 +930,7 @@
                                         <div>
                                             <label class="block text-sm font-bold text-slate-700 mb-1">Nahrát soubor <span class="text-slate-400 font-normal">(nepovinné)</span></label>
                                             <div onclick="document.getElementById('file-upload').click()" class="border-2 border-dashed border-slate-300 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 hover:border-[#ea8d00] transition-all group">
-                                                <input type="file" name="upload" id="file-upload" class="hidden" onchange="handleFileChange(event)" accept=".pdf,.jpg,.png,.doc,.docx" />
+                                                <input type="file" name="attachment" id="file-upload" class="hidden" onchange="handleFileChange(event)" accept=".pdf,.jpg,.png,.doc,.docx" />
                                                 <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-300 group-hover:text-[#ea8d00] mb-2 transition-colors"></i>
                                                 <span class="text-xs text-slate-500" id="file-name-display">Klikněte pro nahrání smlouvy</span>
                                             </div>
@@ -985,9 +1002,10 @@
                 submitButton.disabled = true;
             }
 
+            // KLÍČOVÁ ZMĚNA: Použití FormData pro správné odeslání souborů
             const data = new FormData(form);
 
-            fetch("https://formspree.io/f/xqezzzpe", {
+            fetch("https://formsubmit.co/ajax/kontakt@marek-marek.cz", {
                 method: "POST",
                 body: data,
                 headers: {
