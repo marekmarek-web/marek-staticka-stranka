@@ -1,4 +1,4 @@
-</style><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="cs" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -38,10 +38,6 @@
                         }
                     },
                     keyframes: {
-                        scroll: {
-                            '0%': { transform: 'translateX(0)' },
-                            '100%': { transform: 'translateX(-50%)' },
-                        },
                         shimmer: {
                             '0%': { transform: 'skewX(-20deg) translateX(-150%)' },
                             '100%': { transform: 'skewX(-20deg) translateX(150%)' }
@@ -52,7 +48,6 @@
                         }
                     },
                     animation: {
-                        scroll: 'scroll 15s linear infinite',
                         shimmer: 'shimmer 2.5s infinite',
                         fadeIn: 'fadeIn 0.5s ease-out forwards',
                     }
@@ -128,74 +123,79 @@
             margin: 0; 
         }
 
-/* ========================================= */
-/* FIX NEKONEČNÉHO PÁSU (SÍLA) */
-/* ========================================= */
+        /* ========================================= */
+        /* FIX NEKONEČNÉHO PÁSU (SÍLA) */
+        /* ========================================= */
 
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Posun o polovinu celkové délky */
-}
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Posun o polovinu celkové délky */
+        }
 
-.animate-scroll {
-    /* TOTO JE KLÍČOVÉ: Donutí pás, aby byl extrémně dlouhý (podle obsahu) */
-    width: max-content !important; 
-    min-width: 100%; /* Pojistka */
-    
-    display: flex !important;
-    flex-wrap: nowrap !important; /* Zákaz zalamování */
-    align-items: center;
-    
-    /* Zrušíme mezery v kontejneru a budeme je dělat jen marginem u log */
-    gap: 0 !important; 
-    
-    /* Rychlost pro PC */
-    animation: scroll 40s linear infinite !important;
-}
+        .animate-scroll {
+            /* TOTO JE KLÍČOVÉ: Donutí pás, aby byl extrémně dlouhý (podle obsahu) */
+            width: max-content !important; 
+            min-width: 100%; /* Pojistka */
+            
+            display: flex !important;
+            flex-wrap: nowrap !important; /* Zákaz zalamování */
+            align-items: center;
+            
+            /* Zrušíme mezery v kontejneru a budeme je dělat jen marginem u log */
+            gap: 0 !important; 
+            
+            /* Rychlost pro PC - 40s je plynulé */
+            animation: scroll 40s linear infinite !important;
+        }
 
-/* Nastavení log */
-.partner-logo {
-    flex-shrink: 0 !important; /* Zákaz zmenšování log */
-    width: auto;
-    /* Tady děláme mezery (PC verze) */
-    margin: 0 30px !important; 
-    
-    /* Vzhled */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px !important;
-}
+        /* Nastavení log */
+        .partner-logo {
+            flex-shrink: 0 !important; /* Zákaz zmenšování log */
+            width: auto;
+            /* Tady děláme mezery (PC verze) */
+            margin: 0 30px !important; 
+            
+            /* Vzhled */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px !important;
+        }
 
-.partner-logo img {
-    max-height: 70px !important;
-    max-width: 180px !important;
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-}
+        .partner-logo img {
+            max-height: 70px !important;
+            max-width: 180px !important;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
 
-.partner-logo img:hover {
-    filter: grayscale(0%);
-    opacity: 1;
-    transform: scale(1.1);
-}
+        .partner-logo img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
 
-/* MOBILNÍ NASTAVENÍ */
-@media (max-width: 768px) {
-    .animate-scroll {
-        /* Rychlost pro mobil (10s = fofr) */
-        animation-duration: 10s !important; 
-    }
-    
-    .partner-logo {
-        /* Na mobilu menší mezery */
-        margin: 0 15px !important; 
-        min-width: 120px !important;
-    }
-}
+        /* MOBILNÍ NASTAVENÍ */
+        @media (max-width: 768px) {
+            .animate-scroll {
+                /* Rychlost pro mobil (12s = fofr) */
+                animation-duration: 12s !important; 
+            }
+            
+            .partner-logo {
+                /* Na mobilu menší mezery a menší loga */
+                margin: 0 15px !important; 
+                min-width: 120px !important;
+            }
+            
+            .partner-logo img {
+                max-height: 50px !important; /* Trochu menší na mobilu */
+            }
+        }
+
         .chart-container {
             position: relative;
             height: 300px;
@@ -367,7 +367,7 @@
                         <div class="text-slate-600 space-y-2 leading-relaxed text-xs md:text-sm">
                             <p>
                                 Tato kalkulačka slouží k orientačnímu výpočtu, jak se může vyvíjet hodnota vaší investice v čase při pravidelném investování.
-                                Zohledňuje výši počátečního vkladu, měsíční investici, investiční horizont a zvolenou strategii.
+                                Zohledňuje výši počátečního vklad, měsíční investici, investiční horizont a zvolenou strategii.
                             </p>
                             <p>
                                 Výsledkem je přehledná projekce budoucí hodnoty investice a celkového zhodnocení.
@@ -569,7 +569,7 @@
                                  <span class="flex flex-col items-center gap-1"><i class="fas fa-caret-up text-lg"></i>2008 (Krize)</span>
                                  <span class="flex flex-col items-center gap-1"><i class="fas fa-caret-up text-lg"></i>2019 (Covid)</span>
                              </div>
-                        </div>
+                         </div>
                     </div>
                 </div>
                 
@@ -628,30 +628,31 @@
                     </div>
                 </div>
 
-                <!-- PARTNEŘI / LOGA -->
-<div class="mt-24 pt-10 border-t border-brand-border/50 overflow-hidden marquee-container relative opacity-80 hover:opacity-100 transition-opacity lg:col-span-12">
-    <div class="flex whitespace-nowrap overflow-hidden py-4">
-        <div class="flex animate-scroll items-center">
-            
-            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
-            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
-            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
-            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
-            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
-            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
-            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
-            
-            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
-            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
-            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
-            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
-            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
-            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
-            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
+                <!-- PARTNEŘI / LOGA (OPRAVENÁ SEKCE) -->
+                <div class="mt-24 pt-10 border-t border-brand-border/50 overflow-hidden marquee-container relative opacity-80 hover:opacity-100 transition-opacity lg:col-span-12">
+                    <div class="flex whitespace-nowrap overflow-hidden py-4">
+                        <div class="animate-scroll">
+                            
+                            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+                            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+                            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+                            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+                            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+                            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+                            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
+                            
+                            <!-- DUPLIKÁTY PRO SMYČKU -->
+                            <div class="partner-logo"><img src="/images/creif-logo.png" alt="Creif"></div>
+                            <div class="partner-logo"><img src="/images/amundi-logo.png" alt="Amundi"></div>
+                            <div class="partner-logo"><img src="/images/edward-logo.png" alt="Edward"></div>
+                            <div class="partner-logo"><img src="/images/investika-logo.png" alt="Investika"></div>
+                            <div class="partner-logo"><img src="/images/avant-logo.png" alt="Avant"></div>
+                            <div class="partner-logo"><img src="/images/conseq-logo.png" alt="Conseq"></div>
+                            <div class="partner-logo"><img src="/images/cyrrus-logo.png" alt="Cyrrus"></div>
 
-        </div>
-    </div>
-</div>
+                        </div>
+                    </div>
+                </div>
     <!-- === HLAVNÍ OBSAH KALKULAČKY (KONEC) === -->
 
     <!-- KONTAKTNÍ MODAL -->
