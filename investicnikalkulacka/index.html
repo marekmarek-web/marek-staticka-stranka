@@ -308,7 +308,8 @@
 
     <!-- === HLAVNÍ OBSAH KALKULAČKY (ZAČÁTEK) === -->
     <div class="pt-0">
-        <section id="invest-kalkulacka" class="bg-brand-light py-10 px-4 md:py-20 lg:pt-32">
+        <!-- ZMĚNA: Zvětšený top padding (pt-28) pro mobilní zobrazení, aby obsah nebyl pod hlavičkou -->
+        <section id="invest-kalkulacka" class="bg-brand-light pt-28 pb-10 px-4 md:py-20 lg:pt-32">
             <div class="max-w-7xl mx-auto">
 
                 <!-- HLAVIČKA SEKCE -->
@@ -653,6 +654,9 @@
                         </div>
                     </div>
                 </div>
+            </div> <!-- UZAVŘENÍ MAX-W-7XL -->
+        </section> <!-- UZAVŘENÍ SEKCIE -->
+    </div> <!-- UZAVŘENÍ PT-0 -->
     <!-- === HLAVNÍ OBSAH KALKULAČKY (KONEC) === -->
 
     <!-- KONTAKTNÍ MODAL -->
@@ -706,7 +710,8 @@
     </div>
 
     <!-- === FOOTER (ZAČÁTEK) === -->
-    <footer class="bg-brand-dark text-slate-400 py-16 border-t border-white/10">
+    <!-- ZMĚNA: Odstraněn spodní padding (pb-0), aby footer lícoval se spodkem stránky -->
+    <footer class="bg-brand-dark text-slate-400 pt-16 pb-0 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
@@ -765,7 +770,7 @@
                 </div>
             </div>
 
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
+            <div class="border-t border-white/10 pt-8 pb-6 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
                 <p>&copy; 2025 Marek Marek. Všechna práva vyhrazena.</p>
             </div>
         </div>
