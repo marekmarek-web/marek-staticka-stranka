@@ -128,24 +128,25 @@
             margin: 0; 
         }
         
-        /* NOVÉ STYLY PRO LOGA PARTNERŮ */
-/* OPRAVA VELIKOSTI LOG */
+/* ========================================= */
+/* NOVÉ STYLY PRO LOGA PARTNERŮ */
+/* ========================================= */
+
+/* 1. Vzhled jednotlivých log */
 .partner-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 120px !important; /* Větší prostor pro logo */
-    margin: 15px !important;  /* Rozestupy mezi logy */
-    min-width: 150px;         /* Minimální šířka, aby se nesmrsklo */
+    height: 120px !important;
+    margin: 15px !important;
+    min-width: 150px;
 }
 
 .partner-logo img {
-    max-height: 80px !important; /* ZVĚTŠENÍ: Původně tam bylo asi 40-50px */
-    max-width: 200px !important; /* Aby se vešla i dlouhá loga */
+    max-height: 80px !important;
+    max-width: 200px !important;
     width: auto;
     object-fit: contain;
-    
-    /* Vzhled */
     filter: grayscale(100%);
     opacity: 0.8;
     transition: all 0.3s ease;
@@ -154,83 +155,39 @@
 .partner-logo img:hover {
     filter: grayscale(0%);
     opacity: 1;
-    transform: scale(1.1); /* Efekt zvětšení po najetí */
+    transform: scale(1.1);
 }
 
-/* ZAJIŠTĚNÍ ZALAMOVÁNÍ (Aby se loga netlačila v jedné řadě) */
-/* 1. Definice pohybu */
+/* ========================================= */
+/* FINÁLNÍ OPRAVA POSUVNÍKU (ANIMACE) */
+/* ========================================= */
+
+/* 2. Definice pohybu */
 @keyframes scroll {
     from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-/* 2. Nastavení pásu (VŠECHNA ZAŘÍZENÍ) */
+    to { transform: translateX(-50%); } 
+} 
+
+/* 3. Nastavení pásu (VŠECHNA ZAŘÍZENÍ) */
 .animate-scroll {
-    /* TOTO JE NEJDŮLEŽITĚJŠÍ: Roztáhne pás tak, aby se vešla všechna loga vedle sebe */
+    /* TOHLE JE KLÍČOVÉ: Roztáhne pás podle obsahu = konec sekání */
     width: max-content !important; 
     display: flex !important;
-    flex-wrap: nowrap !important; /* Zakáže zalamování na další řádek */
+    flex-wrap: nowrap !important; 
     
-    /* Základní čas pro PC (větší číslo = pomalejší) */
+    /* Základní čas pro PC */
     animation: scroll 40s linear infinite !important;
 }
 
-/* 3. Specifické nastavení pro MOBIL */
+/* 4. Specifické nastavení pro MOBIL */
 @media (max-width: 768px) {
     .animate-scroll {
-        /* Čas pro mobil. */
-        /* Zkus 20s. Díky 'max-content' to teď bude plynulé a rychlé tak akorát. */
+        /* Čas pro mobil - 20s je ideál pro plynulost */
         animation-duration: 20s !important; 
     }
     
-    /* Zajištění, že loga nejsou nalepená na sobě */
     .partner-logo {
         margin: 0 15px !important;
-    }
-}    
-        /* Custom FAQ Styles for expanding */
-        .faq-answer-active {
-            max-height: 500px !important;
-            opacity: 1 !important;
-        }
-        
-        /* Specific styling for the FAQ cards */
-        .faq-card {
-            border: 1px solid #D6E6FF; /* brand-border */
-            background-color: #ffffff;
-            transition: box-shadow 0.3s;
-        }
-        .faq-card:hover {
-            box-shadow: 0 4px 12px rgba(11, 58, 122, 0.1);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #0B3A7A; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #082855; }
-
-        /* LOGO STYLY */
-        .logo-img-style {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            /* Invert pro tmavé pozadí (TOP) */
-            filter: invert(1);
-            transition: filter 0.3s, transform 0.3s;
-        }
-        .glass-header-scrolled #logo-img-container .logo-img-style {
-            /* Bez inverze pro světlé pozadí (SCROLLED) */
-            filter: invert(0);
-        }
-        /* ============================================= */
-/* VYNUCENÁ RYCHLOST JEN PRO MOBILY */
-/* ============================================= */
-
-        animation-duration: 8s !important; 
-        
-        /* Pojistka, aby animace vůbec běžela */
-        animation-name: scroll !important;
-        animation-timing-function: linear !important;
-        animation-iteration-count: infinite !important;
     }
 }
     </style>
