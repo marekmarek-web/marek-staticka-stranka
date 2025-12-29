@@ -233,7 +233,7 @@
                             <div class="flex flex-col gap-4">
                                 <!-- Product Type Switcher -->
                                 <div class="inline-flex bg-slate-900/50 p-1 rounded-xl border border-white/10 w-fit mb-2">
-                                    <button class="prod-switch active px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-gold text-white shadow-lg" data-prod="mortgage" onclick="switchProduct('mortgage')">
+                                    <button class="prod-switch active px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-gold text-brand-dark shadow-lg" data-prod="mortgage" onclick="switchProduct('mortgage')">
                                         <i class="fas fa-home mr-2"></i>Hypotéka
                                     </button>
                                     <button class="prod-switch px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 text-slate-300 hover:text-white hover:bg-white/5" data-prod="loan" onclick="switchProduct('loan')">
@@ -624,6 +624,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition">Ochrana osobních údajů</a></li>
                         <li><a href="#" class="hover:text-white transition">Cookies</a></li>
+                        <li><a href="#" class="hover:text-white transition">Investiční disclaimer</a></li>
                     </ul>
                 </div>
             </div>
@@ -780,7 +781,7 @@
                     
                     const button = document.createElement('button');
                     button.innerText = val + '%';
-                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-white shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-white'} ${disabled ? 'disabled-btn' : ''}`;
+                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-brand-dark shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-brand-dark'} ${disabled ? 'disabled-btn' : ''}`;
                     button.onclick = () => { if (!disabled) setLtv(val); };
                     els.ltvButtonsContainer.appendChild(button);
                 });
@@ -796,7 +797,7 @@
                     const isActive = state.ltvLock === val;
                     const button = document.createElement('button');
                     button.innerText = val + '%';
-                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-white shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-white'}`;
+                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-brand-dark shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-brand-dark'}`;
                     button.onclick = () => setLtv(val);
                     els.ltvButtonsContainer.appendChild(button);
                 });
@@ -814,7 +815,7 @@
             types.forEach(t => {
                 const isActive = t.id === currentSelected;
                 const activeClass = isActive 
-                    ? 'bg-brand-gold text-white border-brand-gold shadow-md' 
+                    ? 'bg-brand-gold text-brand-dark border-brand-gold shadow-md' 
                     : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-white hover:border-slate-300';
                 
                 html += `
@@ -880,10 +881,10 @@
 
             els.prodSwitches.forEach(btn => {
                 if(btn.dataset.prod === prodType) {
-                    btn.classList.add('bg-brand-gold', 'text-white', 'shadow-lg');
+                    btn.classList.add('bg-brand-gold', 'text-brand-dark', 'shadow-lg');
                     btn.classList.remove('text-slate-300', 'hover:bg-white/5');
                 } else {
-                    btn.classList.remove('bg-brand-gold', 'text-white', 'shadow-lg');
+                    btn.classList.remove('bg-brand-gold', 'text-brand-dark', 'shadow-lg');
                     btn.classList.add('text-slate-300', 'hover:bg-white/5');
                 }
             });
