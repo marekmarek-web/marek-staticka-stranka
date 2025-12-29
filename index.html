@@ -625,54 +625,57 @@
                 </button>
               </div>
     
-              <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-8 border-b border-slate-100">
-                <div class="sm:flex sm:items-start">
-                  <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <h3 class="text-2xl font-bold leading-6 text-brand-dark uppercase tracking-wide" id="modal-title">Nezávazná konzultace</h3>
-                    <p class="text-sm text-slate-600 mt-2 flex items-center gap-2">
-                        <i class="fas fa-comments text-brand-gold"></i>
-                        <span>Rád s Vámi proberu Vaše možnosti</span>
-                    </p>
+              <!-- Wrapper for content to be replaced -->
+              <div id="modalContentContainer">
+                  <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-8 border-b border-slate-100">
+                    <div class="sm:flex sm:items-start">
+                      <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                        <h3 class="text-2xl font-bold leading-6 text-brand-dark uppercase tracking-wide" id="modal-title">Nezávazná konzultace</h3>
+                        <p class="text-sm text-slate-600 mt-2 flex items-center gap-2">
+                            <i class="fas fa-comments text-brand-gold"></i>
+                            <span>Rád s Vámi proberu Vaše možnosti</span>
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="p-8">
-                  <form id="leadForm" class="space-y-5">
-                    <input type="hidden" name="_subject" value="Nová poptávka: Web Marek Marek">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Email <span class="text-red-500">*</span></label>
-                        <div class="relative">
-                            <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
-                            <input type="email" name="email" id="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                  <div class="p-8">
+                      <form id="leadForm" class="space-y-5">
+                        <input type="hidden" name="_subject" value="Nová poptávka: Web Marek Marek">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Email <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
+                                <input type="email" name="email" id="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div>
-                        <label for="telefon" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Telefon <span class="text-slate-400 font-normal normal-case">(nepovinné)</span></label>
-                        <div class="relative">
-                            <i class="fas fa-phone absolute left-4 top-3.5 text-slate-400"></i>
-                            <input type="tel" name="telefon" id="telefon" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                        
+                        <div>
+                            <label for="telefon" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Telefon <span class="text-slate-400 font-normal normal-case">(nepovinné)</span></label>
+                            <div class="relative">
+                                <i class="fas fa-phone absolute left-4 top-3.5 text-slate-400"></i>
+                                <input type="tel" name="telefon" id="telefon" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="flex items-start gap-3 mt-2 bg-blue-50/50 p-3 rounded-lg">
-                        <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-gold rounded border-slate-300 focus:ring-brand-gold cursor-pointer">
-                        <label for="consent" class="text-xs text-slate-600 cursor-pointer select-none">
-                            Souhlasím se zpracováním osobních údajů.
-                        </label>
-                    </div>
+                        <div class="flex items-start gap-3 mt-2 bg-blue-50/50 p-3 rounded-lg">
+                            <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-gold rounded border-slate-300 focus:ring-brand-gold cursor-pointer">
+                            <label for="consent" class="text-xs text-slate-600 cursor-pointer select-none">
+                                Souhlasím se zpracováním osobních údajů.
+                            </label>
+                        </div>
 
-                    <div class="pt-4">
-                        <button type="submit" class="btn-sweep w-full rounded-xl py-4 text-brand-dark font-bold shadow-lg transform transition hover:scale-[1.02] flex items-center justify-center gap-2 text-lg uppercase tracking-wider">
-                            <span>Odeslat nezávazně</span>
-                            <i class="fas fa-paper-plane text-sm"></i>
-                        </button>
-                    </div>
-                  </form>
+                        <div class="pt-4">
+                            <button type="submit" class="btn-sweep w-full rounded-xl py-4 text-brand-dark font-bold shadow-lg transform transition hover:scale-[1.02] flex items-center justify-center gap-2 text-lg uppercase tracking-wider">
+                                <span>Odeslat nezávazně</span>
+                                <i class="fas fa-paper-plane text-sm"></i>
+                            </button>
+                        </div>
+                      </form>
+                  </div>
               </div>
             </div>
           </div>
@@ -743,16 +746,23 @@
                 });
 
                 if (response.ok) {
-                    alert("Děkujeme! Vaše poptávka byla úspěšně odeslána. Ozvu se vám co nejdříve.");
-                    closeModal();
-                    this.reset();
+                    // Success state
+                    document.getElementById('modalContentContainer').innerHTML = `
+                        <div class="p-12 text-center">
+                            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-sm"><i class="fas fa-check"></i></div>
+                            <h3 class="text-2xl font-bold text-brand-dark mb-2">Poptávka odeslána!</h3>
+                            <p class="text-slate-600 mb-8">Děkuji. Budu Vás brzy kontaktovat.</p>
+                            <button onclick="closeModal()" class="text-brand-gold font-bold hover:underline">Zavřít okno</button>
+                        </div>
+                    `;
                 } else {
                     alert("Omlouváme se, došlo k chybě při odesílání formuláře.");
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalContent;
                 }
             } catch (error) {
                 console.error('Chyba:', error);
                 alert("Nepodařilo se odeslat formulář. Zkontrolujte prosím své připojení.");
-            } finally {
                 submitButton.disabled = false;
                 submitButton.innerHTML = originalContent;
             }
