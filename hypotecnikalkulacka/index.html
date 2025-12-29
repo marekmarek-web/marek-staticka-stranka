@@ -24,12 +24,11 @@
                         },
                         brand: {
                             dark: '#0a0f29',    /* Midnight Blue */
-                            gold: '#fbbf24',    /* ZLATÁ (Amber 400) - Hlavní akcent */
-                            lightgold: '#fde047', /* Světlejší zlatá (Amber 300) - Pro gradienty */
-                            darkgold: '#d97706', /* Tmavší zlatá (Amber 600) - Pro texty na světlém */
+                            gold: '#fbbf24',    /* ZLATÁ (Amber 500) */
+                            lightgold: '#fde047', /* Světlejší žlutá pro gradienty */
                             main: '#0B3A7A',    
-                            light: '#EAF3FF',   
-                            border: '#D6E6FF', 
+                            light: '#EAF3FF',  
+                            border: '#D6E6FF',  /* Světlá pro ohraničení */
                         }
                     },
                     fontFamily: {
@@ -96,7 +95,7 @@
 
         /* Styly pro kalkulačku */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
-        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #ea8d00; border: 3px solid #fff; cursor: pointer; margin-top: -10px; box-shadow: 0 4px 6px rgba(234, 141, 0, 0.4); transition: transform 0.1s; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #fbbf24; border: 3px solid #fff; cursor: pointer; margin-top: -10px; box-shadow: 0 4px 6px rgba(251, 191, 36, 0.4); transition: transform 0.1s; }
         input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.1); }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #e2e8f0; border-radius: 3px; }
         input[type=range]:focus { outline: none; }
@@ -135,14 +134,17 @@
     <div class="flex justify-between h-20 items-center gap-4">
 
       <!-- Logo -->
-                    <div id="logo-icon" class="font-bold w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 shadow-sm overflow-hidden bg-white">
-                        <!-- PŘIDÁNO: Logo obrázek s inverzní logikou (na začátku invertovaný = černý v bílém kruhu) -->
-                        <img src="logo_M_white.png" id="logo-image" alt="Logo" class="w-full h-full object-contain p-1.5 transition-all duration-300 invert">
-                    </div>
-                    <div class="flex flex-col leading-tight">
-                        <span id="logo-text" class="text-lg font-bold transition-colors duration-300 text-white">Marek Marek<span class="text-[#ea8d00]">.</span></span>
-                        <span id="logo-subtext" class="text-[0.6rem] font-bold tracking-widest uppercase transition-colors duration-300 text-slate-300">Finanční partner</span>
-                    </div>
+      <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="window.location.href='/'">
+        <div id="logo-icon" class="bg-white text-brand-dark font-bold w-10 h-10 flex items-center justify-center rounded-full text-xl transition-all duration-300 shadow-sm overflow-hidden relative">
+          <span id="logo-fallback" class="hidden absolute inset-0 flex items-center justify-center">M</span>
+          <img id="logo-img" src="logo_M_white.png" alt="M" class="w-3/5 h-3/5 object-contain invert transition-all duration-300 relative z-10"
+               onerror="this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden'); document.getElementById('logo-fallback').classList.add('flex');">
+        </div>
+        <div class="flex flex-col leading-tight">
+          <span id="logo-text" class="text-lg font-bold text-white transition-colors duration-300">Marek Marek<span class="text-brand-gold">.</span></span>
+          <span id="logo-subtext" class="text-[0.6rem] text-slate-300 font-bold tracking-widest uppercase transition-colors duration-300">Finanční partner</span>
+        </div>
+      </div>
 
       <!-- Center Menu -->
       <div class="hidden lg:flex items-center justify-center flex-1 gap-1">
@@ -155,7 +157,7 @@
 
       <!-- CTA & Hamburger -->
       <div class="flex items-center">
-        <a href="/#kontakt" class="hidden lg:block bg-brand-orange hover:bg-brand-gold text-brand-dark font-bold py-2 px-4 rounded-full text-sm transition-colors shadow-md">Kontakt</a>
+        <a href="/#kontakt" class="hidden lg:block bg-brand-gold hover:bg-brand-lightgold text-brand-dark font-bold py-2 px-4 rounded-full text-sm transition-colors shadow-md">Kontakt</a>
         
         <!-- Hamburger (Viditelný i na PC dle požadavku) -->
         <button id="mobile-menu-btn" class="hover:text-[#fbbf24] focus:outline-none p-2 rounded-full transition-colors text-brand-gold ml-2">
@@ -211,7 +213,7 @@
                 <!-- HLAVIČKA KALKULAČKY -->
                 <div class="bg-gradient-to-br from-brand-dark to-[#1e3a6e] rounded-3xl p-8 md:p-12 text-white mb-10 shadow-2xl relative overflow-hidden">
                     <!-- Decorative Elements -->
-                    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-gold opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                     
                     <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start gap-8">
                         
@@ -219,7 +221,7 @@
                         <div class="flex-1">
                             <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
                                 Kalkulačka hypoték a úvěrů<br>
-                                <span class="text-brand-orange">Srovnání bez kontaktu</span>
+                                <span class="text-brand-gold">Srovnání bez kontaktu</span>
                             </h2>
                             <p id="mainDesc" class="text-blue-100 opacity-90 text-lg mb-8 max-w-2xl leading-relaxed">
                                 <strong>Hypotéka bez telefonního čísla</strong> a nutnosti registrace. 
@@ -231,7 +233,7 @@
                             <div class="flex flex-col gap-4">
                                 <!-- Product Type Switcher -->
                                 <div class="inline-flex bg-slate-900/50 p-1 rounded-xl border border-white/10 w-fit mb-2">
-                                    <button class="prod-switch active px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-orange text-white shadow-lg" data-prod="mortgage" onclick="switchProduct('mortgage')">
+                                    <button class="prod-switch active px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-gold text-white shadow-lg" data-prod="mortgage" onclick="switchProduct('mortgage')">
                                         <i class="fas fa-home mr-2"></i>Hypotéka
                                     </button>
                                     <button class="prod-switch px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-200 text-slate-300 hover:text-white hover:bg-white/5" data-prod="loan" onclick="switchProduct('loan')">
@@ -268,7 +270,7 @@
                                         </div>
                                         <span class="text-xs text-slate-400">/ 5</span>
                                     </div>
-                                    <div class="text-xs font-semibold text-slate-500 group-hover:text-brand-orange transition-colors">
+                                    <div class="text-xs font-semibold text-slate-500 group-hover:text-brand-gold transition-colors">
                                         Zobrazit recenze
                                     </div>
                                 </div>
@@ -330,7 +332,7 @@
                             <div class="mb-10">
                                 <div class="flex justify-between items-end mb-4">
                                     <label id="loanLabel" class="text-sm font-bold text-slate-600 tracking-wide uppercase">Kolik si chcete půjčit <span class="text-slate-400 font-normal normal-case">(v Kč)</span></label>
-                                    <input type="text" id="loanInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-orange outline-none w-56 bg-transparent transition-colors p-1" value="6 000 000">
+                                    <input type="text" id="loanInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-gold outline-none w-56 bg-transparent transition-colors p-1" value="6 000 000">
                                 </div>
                                 <input type="range" id="loanRange" min="500000" max="30000000" step="100000" value="6000000" class="w-full">
                                 <div class="flex justify-between text-xs font-medium text-slate-400 mt-3">
@@ -343,7 +345,7 @@
                             <div id="extraMoneyBlock" class="mb-10 hidden">
                                 <div class="flex justify-between items-end mb-4">
                                     <label class="text-sm font-bold text-slate-600 tracking-wide uppercase">Potřebujete peníze navíc? <span class="text-slate-400 font-normal normal-case">(v Kč)</span></label>
-                                    <input type="text" id="extraInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-orange outline-none w-56 bg-transparent transition-colors p-1" value="0">
+                                    <input type="text" id="extraInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-gold outline-none w-56 bg-transparent transition-colors p-1" value="0">
                                 </div>
                                 <input type="range" id="extraRange" min="0" max="1000000" step="10000" value="0" class="w-full">
                                 <div class="flex justify-between text-xs font-medium text-slate-400 mt-3">
@@ -364,7 +366,7 @@
                                 </div>
 
                                 <div class="flex justify-end mb-2">
-                                    <input type="text" id="ownInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-orange outline-none w-56 bg-transparent transition-colors p-1" value="600 000">
+                                    <input type="text" id="ownInputDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-gold outline-none w-56 bg-transparent transition-colors p-1" value="600 000">
                                 </div>
                                 
                                 <input type="range" id="ownRange" min="0" max="15000000" step="10000" value="600 000" class="w-full">
@@ -374,7 +376,7 @@
                                 </div>
                                 
                                 <!-- Investiční/Americká hypo upozornění -->
-                                <div id="investInfo" class="hidden mt-3 text-xs text-brand-orange font-medium flex items-center gap-2">
+                                <div id="investInfo" class="hidden mt-3 text-xs text-brand-gold font-medium flex items-center gap-2">
                                     <i class="fas fa-lock"></i> U tohoto typu hypotéky je maximální LTV omezeno (typicky 60–70 %).
                                 </div>
                             </div>
@@ -409,7 +411,7 @@
                                 <div id="fixationBlock">
                                     <label class="block text-sm font-bold text-slate-600 mb-2 uppercase tracking-wide">Fixace úroku</label>
                                     <div class="relative">
-                                        <select id="fix" class="w-full appearance-none bg-slate-50 border border-slate-200 text-brand-dark font-bold py-3.5 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent cursor-pointer shadow-sm" onchange="calculate()">
+                                        <select id="fix" class="w-full appearance-none bg-slate-50 border border-slate-200 text-brand-dark font-bold py-3.5 px-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-gold focus:border-transparent cursor-pointer shadow-sm" onchange="calculate()">
                                             <option value="3">3 roky</option>
                                             <option value="5" selected>5 let</option>
                                             <option value="7">7 let</option>
@@ -424,7 +426,7 @@
 
                             <!-- LTV info (Optional warning - Only Mortgage) -->
                             <div id="ltvWarning" class="hidden mt-6 p-4 bg-orange-50 text-orange-800 rounded-xl text-sm border border-orange-100 flex items-start gap-3 transition-all duration-300">
-                                <i class="fas fa-exclamation-triangle mt-0.5 text-brand-orange"></i>
+                                <i class="fas fa-exclamation-triangle mt-0.5 text-brand-gold"></i>
                                 <div>
                                     <strong>Pozor na vysoké LTV (<span id="ltvValueWarning"></span>%).</strong> 
                                     Většina bank poskytuje hypotéky maximálně do 80 % nebo 90 % hodnoty nemovitosti.
@@ -441,7 +443,7 @@
                             <div class="bg-brand-dark text-white rounded-2xl shadow-2xl shadow-brand-dark/30 border border-slate-800 p-8 overflow-hidden relative">
                                 <!-- Background decoration -->
                                 <div class="absolute top-0 right-0 w-48 h-48 bg-brand-main opacity-20 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
+                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-gold opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
 
                                 <h3 class="text-slate-400 font-medium mb-2 relative z-10 text-sm uppercase tracking-wider">Měsíční splátka od</h3>
                                 <div class="flex items-baseline gap-2 mb-8 relative z-10">
@@ -466,7 +468,7 @@
                                 </div>
 
                                 <div class="mt-8 relative z-10">
-                                    <button onclick="openGenericModal()" class="group relative w-full bg-gradient-to-r from-brand-orange to-brand-gold hover:to-brand-orange text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden">
+                                    <button onclick="openGenericModal()" class="group relative w-full bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden">
                                         <!-- Shimmer effect -->
                                         <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                                         
@@ -501,7 +503,7 @@
                              <span id="monthlyPaymentMobile" class="text-3xl font-black text-white tracking-tight">--</span>
                              <span class="text-lg font-medium text-slate-500">Kč</span>
                          </div>
-                         <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); openGenericModal();" class="w-full bg-gradient-to-r from-brand-orange to-brand-gold text-brand-dark font-extrabold py-3 rounded-xl shadow-lg transition-all">
+                         <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' }); openGenericModal();" class="w-full bg-gradient-to-r from-brand-gold to-brand-lightgold text-brand-dark font-extrabold py-3 rounded-xl shadow-lg transition-all">
                              Získejte nezávaznou nabídku
                          </button>
                     </div>
@@ -591,11 +593,11 @@
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-brand-orange transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-orange transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-orange transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-brand-orange transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-brand-orange transition">Podnikatelé a firem</a></li>
+                        <li><a href="/#sluzby" class="hover:text-brand-gold transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-gold transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-gold transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-brand-gold transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-brand-gold transition">Podnikatelé a firem</a></li>
                     </ul>
                 </div>
 
@@ -603,15 +605,15 @@
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-orange"></i>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"></i>
                             <span>Jana z Dražic 99<br>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-brand-orange"></i>
+                            <i class="fas fa-phone mr-3 text-brand-gold"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-brand-orange"></i>
+                            <i class="fas fa-envelope mr-3 text-brand-gold"></i>
                             <span>kontakt@marek-marek.cz</span>
                         </li>
                     </ul>
@@ -622,7 +624,6 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-white transition">Ochrana osobních údajů</a></li>
                         <li><a href="#" class="hover:text-white transition">Cookies</a></li>
-
                     </ul>
                 </div>
             </div>
@@ -779,7 +780,7 @@
                     
                     const button = document.createElement('button');
                     button.innerText = val + '%';
-                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-orange text-white shadow-md' : 'text-slate-600 hover:bg-brand-orange hover:text-white'} ${disabled ? 'disabled-btn' : ''}`;
+                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-white shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-white'} ${disabled ? 'disabled-btn' : ''}`;
                     button.onclick = () => { if (!disabled) setLtv(val); };
                     els.ltvButtonsContainer.appendChild(button);
                 });
@@ -795,7 +796,7 @@
                     const isActive = state.ltvLock === val;
                     const button = document.createElement('button');
                     button.innerText = val + '%';
-                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-orange text-white shadow-md' : 'text-slate-600 hover:bg-brand-orange hover:text-white'}`;
+                    button.className = `text-xs font-bold px-3 py-1.5 rounded-md transition-colors ${isActive ? 'bg-brand-gold text-white shadow-md' : 'text-slate-600 hover:bg-brand-gold hover:text-white'}`;
                     button.onclick = () => setLtv(val);
                     els.ltvButtonsContainer.appendChild(button);
                 });
@@ -813,7 +814,7 @@
             types.forEach(t => {
                 const isActive = t.id === currentSelected;
                 const activeClass = isActive 
-                    ? 'bg-brand-orange text-white border-brand-orange shadow-md' 
+                    ? 'bg-brand-gold text-white border-brand-gold shadow-md' 
                     : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-white hover:border-slate-300';
                 
                 html += `
@@ -857,8 +858,11 @@
                 state.mortgageType = 'standard';
                 state.loan = limits.mortgage.default;
                 state.ltvLock = 90;
-                // FINANČNÍ MATEMATIKA: Vlastní zdroje jako % z půjčky
+                
+                // FINANČNÍ MATEMATIKA: Simplified per user request
+                // Own = 10% of Loan Amount for 90% LTV
                 state.own = state.loan * 0.1;
+
                 els.loanInput.value = formatCurrency(state.loan);
                 els.loanRange.value = state.loan;
                 els.ownInput.value = formatCurrency(state.own);
@@ -876,10 +880,10 @@
 
             els.prodSwitches.forEach(btn => {
                 if(btn.dataset.prod === prodType) {
-                    btn.classList.add('bg-brand-orange', 'text-white', 'shadow-lg');
+                    btn.classList.add('bg-brand-gold', 'text-white', 'shadow-lg');
                     btn.classList.remove('text-slate-300', 'hover:bg-white/5');
                 } else {
-                    btn.classList.remove('bg-brand-orange', 'text-white', 'shadow-lg');
+                    btn.classList.remove('bg-brand-gold', 'text-white', 'shadow-lg');
                     btn.classList.add('text-slate-300', 'hover:bg-white/5');
                 }
             });
@@ -1011,7 +1015,7 @@
 
             if (state.ltvLock !== null) {
                  if (state.product === 'mortgage') {
-                    // FINANČNÍ MATEMATIKA: Vlastní zdroje jako procento z KOLIK
+                    // Own = (100 - LTV_Button)% * Loan Amount
                     const ownPercent = (100 - state.ltvLock) / 100;
                     state.own = Math.round((state.loan * ownPercent) / 1000) * 1000;
                 } 
@@ -1052,7 +1056,7 @@
             renderLtvButtons();
             
             if (state.product === 'mortgage') {
-                // FINANČNÍ MATEMATIKA: LTV 90% = Vlastní zdroje 10% z Půjčky
+                // Own = (100 - targetVal)% * Loan Amount
                 const ownPercent = (100 - targetVal) / 100;
                 state.own = Math.round((state.loan * ownPercent) / 1000) * 1000;
             } 
@@ -1082,8 +1086,9 @@
                 
                 // Rate Adjustment based on LTV
                 let penalty = 0.0;
-                if (calcLtv > 90) penalty += 1.5;
-                // Removed bonuses for lower LTV to keep rate above base
+                
+                // Penalizace až nad 91% (protože zjednodušený výpočet 90% tlačítka dává reálné LTV cca 91%)
+                if (calcLtv > 91) penalty += 1.5;
                 
                 if (state.mortgageType === 'american') penalty += 1.5; 
                 if (state.mortgageType === 'investment') penalty += 0.4; 
@@ -1097,7 +1102,6 @@
 
                 const fixYears = parseInt(els.fixationSelect.value);
                 if (fixYears < 5) finalRate += 0.1;
-                // Removed discount for longer fix to maintain floor if needed, or check logic
                 else if (fixYears > 7) {
                      let discounted = finalRate - 0.15;
                      if (discounted < 4.39) finalRate = 4.39;
@@ -1107,7 +1111,7 @@
                 // Display LTV (If button is active, we show button value for consistency)
                 els.ltv.innerText = (state.ltvLock !== null ? state.ltvLock : calcLtv) + " %";
                 
-                if (calcLtv > 90) {
+                if (calcLtv > 91) {
                     els.ltvWarning.classList.remove('hidden');
                     els.ltvValueWarning.innerText = calcLtv;
                 } else {
@@ -1164,8 +1168,9 @@
                 if (state.product === 'mortgage') {
                     let p = 0;
                     let ltv = getCalculatedLtv();
-                    if(ltv > 90) p += 1.5; 
-                    // No negative p for standard mortgage to keep rate >= base
+                    
+                    if(ltv > 91) p += 1.5; 
+                    
                     if(state.mortgageType==='american') p+=1.5;
                     if(state.mortgageType==='investment') p+=0.4;
                     if(state.type==='refi') p-=0.2;
@@ -1187,7 +1192,7 @@
                 
                 const delay = index * 70;
                 html += `
-                <div class="animate-fade-in bg-white border border-slate-100 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-lg hover:border-brand-orange transition-all group" style="animation-delay: ${delay}ms">
+                <div class="animate-fade-in bg-white border border-slate-100 rounded-xl p-5 flex flex-col md:flex-row items-center gap-6 hover:shadow-lg hover:border-brand-gold transition-all group" style="animation-delay: ${delay}ms">
                     <img src="${bank.logoUrl}" class="bank-logo h-8" onerror="this.onerror=null;this.src='https://placehold.co/100x30/1e293b/ffffff?text=${bank.id.toUpperCase()}';">
                     <div class="flex-1 flex flex-row justify-between w-full md:w-auto items-center gap-4">
                         <div class="text-center md:text-left">
@@ -1199,7 +1204,7 @@
                             <div class="font-bold text-xl text-brand-dark">${formatCurrency(pmt)} Kč</div>
                         </div>
                     </div>
-                    <button onclick="openModal('${bank.name}')" class="bg-gradient-to-r from-brand-orange to-brand-gold text-brand-dark font-bold py-2 px-6 rounded-xl shadow-md hover:shadow-lg hover:from-brand-gold hover:to-brand-orange transition-all transform hover:-translate-y-0.5 w-full md:w-auto">
+                    <button onclick="openModal('${bank.name}')" class="bg-gradient-to-r from-brand-gold to-brand-lightgold text-brand-dark font-bold py-2 px-6 rounded-xl shadow-md hover:shadow-lg hover:from-brand-lightgold hover:to-brand-gold transition-all transform hover:-translate-y-0.5 w-full md:w-auto">
                         Chci nabídku
                     </button>
                 </div>`;
@@ -1216,7 +1221,7 @@
                 <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-8 border-b border-slate-100">
                     <h3 class="text-2xl font-bold text-brand-dark">Mám zájem o nabídku</h3>
                     <p class="text-sm text-slate-600 mt-2 flex items-center gap-2">
-                        <i class="fas fa-info-circle text-brand-orange"></i>
+                        <i class="fas fa-info-circle text-brand-gold"></i>
                         <span>${contextText}</span>
                     </p>
                 </div>
@@ -1236,25 +1241,25 @@
                                 <label class="block text-sm font-bold text-slate-700 mb-1">Jméno a příjmení <span class="text-red-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-user absolute left-4 top-3.5 text-slate-400"></i>
-                                    <input type="text" name="name" required placeholder="Jan Novák" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-orange outline-none transition-shadow bg-slate-50">
+                                    <input type="text" name="name" required placeholder="Jan Novák" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow bg-slate-50">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-1">E-mail <span class="text-red-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
-                                    <input type="email" name="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-orange outline-none transition-shadow bg-slate-50">
+                                    <input type="email" name="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow bg-slate-50">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-1">Telefon <span class="text-slate-400 font-normal">(nepovinné)</span></label>
                                 <div class="relative">
                                     <i class="fas fa-phone absolute left-4 top-3.5 text-slate-400"></i>
-                                    <input type="tel" name="phone" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-orange outline-none transition-shadow bg-slate-50">
+                                    <input type="tel" name="phone" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold outline-none transition-shadow bg-slate-50">
                                 </div>
                             </div>
                             <div class="flex items-start gap-3 mt-2 bg-blue-50/50 p-3 rounded-lg">
-                                <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-orange rounded border-slate-300">
+                                <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-gold rounded border-slate-300">
                                 <label for="consent" class="text-xs text-slate-600 cursor-pointer">
                                     Souhlasím se zpracováním osobních údajů za účelem vytvoření nezávazné nabídky.
                                 </label>
@@ -1326,7 +1331,7 @@
                             <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-sm"><i class="fas fa-check"></i></div>
                             <h3 class="2xl font-bold text-brand-dark mb-2">Poptávka odeslána!</h3>
                             <p class="text-slate-600 mb-8">Děkujeme. Náš specialista vás bude brzy kontaktovat.</p>
-                            <button onclick="closeModal()" class="text-brand-orange font-bold hover:underline">Zavřít okno</button>
+                            <button onclick="closeModal()" class="text-brand-gold font-bold hover:underline">Zavřít okno</button>
                         </div>`;
                 } else {
                     throw new Error('Chyba při odesílání');
