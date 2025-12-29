@@ -6,6 +6,22 @@
     <title>Životní pojištění Kalkulačka | Marek Marek - Finanční partner</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0f29',    /* Tmavě modrá */
+                            gold: '#fbbf24',    /* Zlatá pro hover */
+                            border: '#D6E6FF',  /* Světlá pro ohraničení */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Lucide Icons CDN (Pro ikony) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- FontAwesome CDN (Pro hvězdičky a trofej v recenzích) -->
@@ -135,8 +151,8 @@
 
     <!-- --- HEADER --- -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 glass-header-top">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between h-20 items-center gap-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center gap-4">
                 
                 <!-- Logo -->
                 <a href="/" class="flex items-center gap-3 cursor-pointer shrink-0">
@@ -194,6 +210,9 @@
                     <a href="/investicnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
                         <i data-lucide="trending-up" class="w-5 h-5 text-[#0B3A7A] mr-3"></i> Investiční kalkulačka
                     </a>
+                    <a href="https://www.marek-marek.cz/penzijnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
+                        <i data-lucide="piggy-bank" class="w-5 h-5 text-[#0B3A7A] mr-3"></i> Penzijní kalkulačka
+                    </a>
                     <a href="/zivotnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
                         <i data-lucide="heart-pulse" class="w-5 h-5 text-red-500 mr-3"></i> Kalkulačka životního pojištění
                     </a>
@@ -207,99 +226,92 @@
         </div>
       </nav>
 
-    <!-- 1. HERO SECTION (PŘIDANÝ BLOK) -->
-    <!-- UPRAVENO: mt-6 pro mobil (místo mt-16), md:mt-16 pro desktop -->
+    <!-- 1. HERO SECTION (UPRAVENÝ BLOK) -->
+    <!-- UPRAVENO: mt-6 pro mobil, md:mt-16 pro desktop -->
     <div class="py-8 px-4 md:py-12 mt-6 md:mt-16">
         <div class="max-w-7xl mx-auto">
             
-            <!-- HERO CONTAINER START -->
-            <!-- OPRAVA: Odstraněno overflow-hidden, aby se ořezávalo jen pozadí, ale tooltipy mohly přetékat -->
-            <div class="relative rounded-3xl mb-10 min-h-[400px] flex flex-col justify-center shadow-2xl">
-                 
-                 <!-- 1. Vrstva: POZADÍ (Zde zachováno overflow-hidden pro ořezání blobů) -->
-                 <div class="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none hero-decoration">
-                     <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f29] to-[#1e3a6e]"></div>
-                     <!-- Background Blob -->
-                     <div class="absolute top-0 right-0 w-96 h-96 bg-[#ea8d00] opacity-10 rounded-full blur-3xl -mr-20 -mt-20"></div>
-                 </div>
-
-                 <!-- 2. Vrstva: OBSAH -->
-                 <div class="relative z-10 p-6 md:p-12 text-white flex flex-col lg:flex-row justify-between items-center lg:items-start gap-8">
+            <!-- HERO CONTAINER START (Nový design) -->
+            <div class="bg-gradient-to-br from-[#0a0f29] to-[#1e3a6e] rounded-3xl p-8 md:p-12 text-white mb-10 shadow-2xl relative overflow-hidden font-sans">
+    
+                <!-- Dekorativní prvky na pozadí (Záře) -->
+                <div class="absolute top-0 right-0 w-96 h-96 bg-[#ea8d00] opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                
+                <!-- Hlavní obsah -->
+                <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start gap-8">
                     
-                    <!-- Textová část -->
-                    <div class="flex-1 max-w-3xl">
-                        <h2 class="text-3xl md:text-5xl font-extrabold mb-6 leading-tight">
-                            Kalkulačka životního pojištění – <span class="text-[#ea8d00]">výpočet potřebného krytí</span>
+                    <!-- Levá část: Text a Tlačítka (Štítky) -->
+                    <div class="flex-1 text-center lg:text-left">
+                        <!-- Nadpis -->
+                        <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+                            Kalkulačka životního pojištění – <br>
+                            <span class="text-[#ea8d00]">výpočet potřebného krytí</span>
                         </h2>
-                        <p class="text-blue-100 opacity-90 text-lg mb-8 leading-relaxed max-w-2xl">
+                        
+                        <!-- Podnadpis / Perex -->
+                        <p class="text-blue-100 opacity-90 text-lg mb-8 max-w-2xl leading-relaxed mx-auto lg:mx-0">
                             Spočítejte si orientačně, jaké krytí životního pojištění dává smysl podle příjmu, výdajů a závazků. 
                             Výsledek vysvětlím a navrhnu další postup. Telefon je volitelný.
                         </p>
-                        
-                        <div class="inline-flex flex-wrap gap-3 items-center">
-                            <div class="px-4 py-2 rounded-lg text-sm font-bold bg-[#ea8d00] text-white shadow-lg flex items-center gap-2">
+            
+                        <!-- Tlačítka / Štítky (Původní logika v novém layoutu) -->
+                        <div class="flex flex-wrap gap-3 items-center justify-center lg:justify-start">
+                            <div class="px-4 py-2.5 rounded-lg text-sm font-bold bg-[#ea8d00] text-white shadow-lg flex items-center gap-2">
                                <i data-lucide="heart-pulse" class="w-4 h-4"></i>
                                Analýza potřeb
                             </div>
 
                             <!-- 6% Rentiér Badge -->
-                            <div class="group relative px-4 py-2 rounded-lg text-sm font-bold bg-white/10 text-white backdrop-blur-md flex items-center gap-2 border border-white/10 cursor-help">
+                            <div class="group relative px-4 py-2.5 rounded-lg text-sm font-bold bg-white/10 text-white backdrop-blur-md flex items-center gap-2 border border-white/10 cursor-help hover:bg-white/20 transition-all">
                                <i data-lucide="trending-up" class="w-4 h-4 text-[#ea8d00]"></i>
                                6% Rentiér
                                
                                <!-- Tooltip -->
-                               <div class="absolute top-full left-0 mt-3 w-80 p-4 bg-white text-slate-800 text-xs font-normal rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-slate-100 pointer-events-none transform translate-y-2 group-hover:translate-y-0">
+                               <div class="absolute top-full left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 mt-3 w-80 p-4 bg-white text-slate-800 text-xs font-normal rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-slate-100 pointer-events-none transform translate-y-2 group-hover:translate-y-0 text-left">
                                    <p class="leading-relaxed"><strong>Rentiérský výpočet:</strong> Pojistná částka (např. 1 mil. Kč) se zainvestuje s výnosem 6 % p.a. To generuje rentu 60 000 Kč ročně (5 000 Kč měsíčně), která dlouhodobě dorovnává výpadek příjmu při invaliditě.</p>
-                                   <div class="absolute -top-2 left-6 w-4 h-4 bg-white transform rotate-45 border-t border-l border-slate-100"></div>
+                                   <div class="absolute -top-2 left-1/2 lg:left-6 -translate-x-1/2 lg:translate-x-0 w-4 h-4 bg-white transform rotate-45 border-t border-l border-slate-100"></div>
                                </div>
                             </div>
                             
                             <!-- EFPA Tooltip / Badge -->
-                            <div class="group relative px-4 py-2 rounded-lg text-sm font-bold bg-white/10 text-white backdrop-blur-md flex items-center gap-2 border border-white/10 cursor-help">
+                            <div class="group relative px-4 py-2.5 rounded-lg text-sm font-bold bg-white/10 text-white backdrop-blur-md flex items-center gap-2 border border-white/10 cursor-help hover:bg-white/20 transition-all">
                                <i data-lucide="shield-check" class="w-4 h-4"></i>
                                Dle metodiky EFPA
                                
                                <!-- Tooltip -->
-                               <div class="absolute top-full left-0 mt-3 w-72 p-4 bg-white text-slate-800 text-xs font-normal rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-slate-100 pointer-events-none transform translate-y-2 group-hover:translate-y-0">
+                               <div class="absolute top-full left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 mt-3 w-72 p-4 bg-white text-slate-800 text-xs font-normal rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-slate-100 pointer-events-none transform translate-y-2 group-hover:translate-y-0 text-left">
                                    <p class="leading-relaxed"><strong>EFPA (European Financial Planning Association)</strong> je organizace určující evropské standardy v oblasti finančního poradenství a plánování. Metodika zaručuje objektivní a profesionální výpočet.</p>
-                                   <div class="absolute -top-2 left-6 w-4 h-4 bg-white transform rotate-45 border-t border-l border-slate-100"></div>
+                                   <div class="absolute -top-2 left-1/2 lg:left-6 -translate-x-1/2 lg:translate-x-0 w-4 h-4 bg-white transform rotate-45 border-t border-l border-slate-100"></div>
                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- PŘIDÁNO: Recenze Container (v Hero sekci) -->
-                    <div class="flex flex-col gap-3 min-w-[240px]">
-    
+            
+                    <!-- Pravá část: Recenze / Trust factory -->
+                    <div class="flex flex-col gap-3 min-w-[240px] mt-8 lg:mt-0 w-full lg:w-auto">
                         <!-- Google Badge -->
-                        <a href="https://www.google.com/search?q=marek+marek+recenze" 
-                           target="_blank" 
-                           class="review-badge bg-white rounded-xl py-3 px-4 shadow-lg flex items-center gap-4 group no-underline text-slate-800">
+                        <a href="https://www.google.com/search?q=marek+marek+recenze" target="_blank" class="bg-white rounded-xl py-3 px-4 shadow-lg flex items-center gap-4 group no-underline text-slate-800 transition-transform hover:-translate-y-0.5">
                             <div class="bg-white p-1.5 rounded-full border border-slate-100 shrink-0">
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="w-5 h-5">
                             </div>
                             <div>
                                 <div class="flex items-center gap-1.5 mb-0.5">
                                     <span class="font-bold text-lg">4.8</span>
-                                    <div class="flex text-brand-gold text-xs text-yellow-400">
-                                        <!-- Hvězdičky (FontAwesome ikony) -->
+                                    <div class="flex text-yellow-400 text-xs">
                                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                                     </div>
                                     <span class="text-xs text-slate-400">/ 5</span>
                                 </div>
-                                <div class="text-xs font-semibold text-slate-500 group-hover:text-brand-orange transition-colors">
+                                <div class="text-xs font-semibold text-slate-500 group-hover:text-[#ea8d00] transition-colors">
                                     Zobrazit recenze
                                 </div>
                             </div>
                         </a>
-                    
-                        <!-- Seznam/Firmy.cz Badge -->
-                        <a href="https://www.firmy.cz/detail/13091457-marek-marek-privatni-financni-planovani-roudnice-nad-labem.html" 
-                           target="_blank" 
-                           class="review-badge bg-white rounded-xl py-3 px-4 shadow-lg flex items-center gap-4 group no-underline text-slate-800 trophy-badge">
-                            
-                            <!-- Trophy Icon Background (Fixní pozice v rohu) -->
-                            <i class="fas fa-trophy trophy-icon"></i>
+            
+                        <!-- Firmy.cz Badge -->
+                        <a href="https://www.firmy.cz/detail/13091457-marek-marek-privatni-financni-planovani-roudnice-nad-labem.html" target="_blank" class="bg-white rounded-xl py-3 px-4 shadow-lg flex items-center gap-4 group no-underline text-slate-800 transition-transform hover:-translate-y-0.5 relative overflow-hidden">
+                            <!-- Ikona poháru na pozadí -->
+                            <i class="fas fa-trophy absolute -right-0.5 -bottom-0.5 text-[2.5rem] text-yellow-400 opacity-10 pointer-events-none"></i>
                             
                             <div class="bg-[#cc0000] p-1.5 rounded-full shrink-0 w-8 h-8 flex items-center justify-center text-white font-serif font-bold text-xs">
                                 S
@@ -307,7 +319,7 @@
                             <div>
                                 <div class="flex items-center gap-2 mb-0.5">
                                     <span class="font-bold text-sm">Firmy.cz</span>
-                                    <i class="fas fa-trophy text-brand-gold text-yellow-400 text-sm"></i>
+                                    <i class="fas fa-trophy text-yellow-400 text-sm"></i>
                                 </div>
                                 <div class="text-xs font-semibold text-slate-500 group-hover:text-[#cc0000] transition-colors">
                                     Ověřená firma
@@ -315,9 +327,8 @@
                             </div>
                         </a>
                     </div>
-                    <!-- Konec Recenze Container -->
-
-                 </div>
+            
+                </div>
             </div>
             <!-- HERO CONTAINER END -->
 
@@ -412,7 +423,7 @@
                             </div>
 
                             <h3 class="text-slate-400 font-medium mb-6 relative z-10 text-sm uppercase tracking-wider flex items-center justify-between">
-                                Doporučené pojistné částky
+                                Doporučené min. pojistné částky
                                 <span class="text-[#ea8d00] text-xs normal-case bg-[#ea8d00]/10 px-2 py-1 rounded font-bold">Klesající do 65 let</span>
                             </h3>
 
@@ -477,49 +488,54 @@
                 </div>
             </div>
 
-                <!-- NOVÝ ROZCESTNÍK -->
-                <div class="max-w-7xl mx-auto mt-20 mb-20 pt-10 border-t border-brand-border/50">
-                    <h3 class="text-2xl font-bold text-[#0a0f29] mb-8 text-center">Spočítejte si sami</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        
-                        <!-- Card 1: Investice -->
-                        <a href="/investicnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                                <i class="fas fa-chart-line text-2xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Investiční kalkulačka</h4>
-                            <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Zhodnocování úspor a tvorba renty na stáří.</p>
-                        </a>
+            <!-- ROZCESTNÍK KALKULAČEK (NOVÁ SEKCE) -->
+            <div class="max-w-7xl mx-auto mt-20 mb-20 pt-10 border-t border-brand-border/50">
+                <h3 class="text-2xl font-bold text-[#0a0f29] mb-8 text-center">Spočítejte si sami</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Card 1: Investice -->
+                    <a href="/investicnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                        <!-- Ikona v kroužku (mění barvu při hoveru celé karty díky 'group-hover') -->
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Investiční kalkulačka</h4>
+                        <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Zhodnocování úspor a tvorba renty na stáří.</p>
+                    </a>
 
-                        <!-- Card 2: Penze -->
-                        <a href="https://www.marek-marek.cz/penzijnikalkulacka" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                                <i class="fas fa-piggy-bank text-2xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Penzijní kalkulačka</h4>
-                            <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Spočítejte si realitu státního důchodu a nutné úspory.</p>
-                        </a>
+                    <!-- Card 2: Penze -->
+                    <a href="https://www.marek-marek.cz/penzijnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-piggy-bank text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Penzijní kalkulačka</h4>
+                        <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Spočítejte si realitu státního důchodu a nutné úspory.</p>
+                    </a>
 
-                         <!-- Card 3: Životní pojištění -->
-                         <a href="/zivotnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                                <i class="fas fa-heart-pulse text-2xl"></i>
-                            </div>
-                            <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Životní pojištění</h4>
-                            <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Výpočet potřebného krytí pro zajištění rodiny a příjmů.</p>
-                        </a>
-                    </div>
+                    <!-- Card 3: Životní pojištění -->
+                    <a href="/zivotnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-heart-pulse text-2xl"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Životní pojištění</h4>
+                        <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Výpočet potřebného krytí pro zajištění rodiny a příjmů.</p>
+                    </a>
                 </div>
-
+            </div>
+            
+        </div>
+    </div>
 
     <!-- === FOOTER (ZAČÁTEK) === -->
-    <footer class="bg-brand-dark text-slate-400 py-16 border-t border-white/10">
+    <footer class="bg-[#0a0f29] text-slate-400 py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-2 mb-4">
+                        <!-- PŘIDÁNO: Logo místo M, invertované aby bylo černé na bílém podkladu čtverečku -->
                         <div class="bg-white w-8 h-8 flex items-center justify-center rounded">
-                             <img src="logo_M_white.png" alt="M" class="w-6 h-6 object-contain invert" onerror="this.parentElement.innerText='M'">
+                             <img src="logo_M_white.png" alt="M" class="w-6 h-6 object-contain invert">
                         </div>
                         <span class="text-xl font-bold text-white">Marek Marek.</span>
                     </div>
@@ -527,21 +543,21 @@
                         Pomáhám klientům budovat a chránit majetek pomocí ověřených strategií.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/marekmarek_pfp/" class="text-slate-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
-                        <a href="https://www.facebook.com/SMMarkx" class="text-slate-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
-                        <a href="https://www.linkedin.com/in/marek-marek-489394226/" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
-                        <a href="http://wa.me/420778511166" class="text-slate-400 hover:text-white transition"><i class="fab fa-whatsapp text-xl"></i></a>
+                        <a href="https://www.instagram.com/marekmarek_pfp/" class="text-slate-400 hover:text-white transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="https://www.facebook.com/SMMarkx" class="text-slate-400 hover:text-white transition"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="https://www.linkedin.com/in/marek-marek-489394226/" class="text-slate-400 hover:text-white transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                        <a href="http://wa.me/420778511166" class="text-slate-400 hover:text-white transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
                     </div>
                 </div>
 
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-brand-orange transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-orange transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-orange transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-brand-orange transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-brand-orange transition">Podnikatelé a firem</a></li>
+                        <li><a href="/#sluzby" class="hover:text-[#ea8d00] transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-[#ea8d00] transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-[#ea8d00] transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-[#ea8d00] transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-[#ea8d00] transition">Podnikatelé a firmy</a></li>
                     </ul>
                 </div>
 
@@ -549,16 +565,16 @@
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-orange"></i>
-                            <span>Jana z Dražic 99<br>Roudnice nad Labem</span>
+                            <i data-lucide="map-pin" class="w-4 h-4 mt-1 mr-3 text-[#ea8d00]"></i>
+                            <span>Jana z Dražic 99<br/>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-brand-orange"></i>
+                            <i data-lucide="phone" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-brand-orange"></i>
-                            <span>kontakt@marek-marek.cz</span>
+                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
+                            <a href="mailto:kontakt@marek-marek.cz" class="hover:text-white transition">kontakt@marek-marek.cz</a>
                         </li>
                     </ul>
                 </div>
@@ -566,9 +582,8 @@
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Informace</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white transition">Ochrana osobních údajů</a></li>
-                        <li><a href="#" class="hover:text-white transition">Cookies</a></li>
-                        <li><a href="#" class="hover:text-white transition">Investiční disclaimer</a></li>
+                        <li><a href="/gdpr/" class="hover:text-white transition">Ochrana osobních údajů</a></li>
+                        <li><a href="/cookies/" class="hover:text-white transition">Cookies</a></li>
                     </ul>
                 </div>
             </div>
@@ -672,8 +687,13 @@
 
             // 3. Smrt
             const survivorStateSupport = (hasSpouse || children > 0) ? 10000 : 0; 
-            const deathGapMonthly = Math.max(0, targetMonthlyIncome - survivorStateSupport);
-            const capitalDeathIncome = calculateCapitalNeeded(deathGapMonthly, yearsToRetirement);
+            
+            // Výpočet kapitálu na dorovnání příjmu (pouze pokud má rodinu)
+            let capitalDeathIncome = 0;
+            if (hasSpouse || children > 0) {
+                const deathGapMonthly = Math.max(0, targetMonthlyIncome - survivorStateSupport);
+                capitalDeathIncome = calculateCapitalNeeded(deathGapMonthly, yearsToRetirement);
+            }
             
             let spouseLumpSum = 0;
             if (hasSpouse) {
@@ -694,6 +714,8 @@
             const familyProtection = Math.max(capitalDeathIncome, spouseLumpSum + childrenLumpSum);
             
             // Výpočet hrubého krytí smrti
+            // Pokud není rodina (děti=0, manželka=false), familyProtection je 0.
+            // Výpočet je pak čistě: Závazky - Rezervy.
             let deathCoverageRaw = Math.max(0, liabilities + familyProtection - reserves);
 
             // ÚPRAVA: Pokud klient nemá děti, manželku/manžela ani závazky, pojistné riziko smrti je 0
