@@ -19,37 +19,39 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
                     colors: {
                         slate: {
+                            50: '#f8fafc',
                             850: '#1e293b',
                             900: '#0f172a',
                             950: '#020617',
                         },
                         brand: {
-                            dark: '#0a0f29',   // Hero pozadí
-                            orange: '#ea8d00', // CTA, akcenty
-                            gold: '#fbbf24',   // Jemné detaily
-                            main: '#0B3A7A',   // Hlavní modrá (texty, ikony)
-                            light: '#EAF3FF',  // Pozadí sekcí
-                            border: '#D6E6FF', // Rámečky
+                            dark: '#0a0f29',    /* Midnight Blue */
+                            gold: '#fbbf24',    /* ZLATÁ (Amber 400) - Hlavní akcent */
+                            lightgold: '#fde047', /* Světlejší zlatá (Amber 300) - Pro gradienty */
+                            darkgold: '#d97706', /* Tmavší zlatá (Amber 600) - Pro texty na světlém */
+                            main: '#0B3A7A',    
+                            light: '#EAF3FF',   
+                            border: '#D6E6FF',  
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
                     },
                     keyframes: {
                         shimmer: {
                             '0%': { transform: 'skewX(-20deg) translateX(-150%)' },
                             '100%': { transform: 'skewX(-20deg) translateX(150%)' }
                         },
-                        fadeIn: {
-                            'from': { opacity: 0, transform: 'translateY(10px)' },
-                            'to': { opacity: 1, transform: 'translateY(0)' }
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' }
                         }
                     },
                     animation: {
                         shimmer: 'shimmer 2.5s infinite',
-                        fadeIn: 'fadeIn 0.5s ease-out forwards',
+                        scroll: 'scroll 40s linear infinite', 
                     }
                 }
             }
@@ -96,11 +98,11 @@
             height: 24px;
             width: 24px;
             border-radius: 50%;
-            background: #ea8d00;
+            background: #fbbf24; /* ZLATÁ */
             border: 3px solid #fff;
             cursor: pointer;
             margin-top: -10px;
-            box-shadow: 0 4px 6px rgba(234, 141, 0, 0.4);
+            box-shadow: 0 4px 6px rgba(251, 191, 36, 0.4); /* ZLATÝ STÍN */
             transition: transform 0.1s;
         }
         input[type=range]::-webkit-slider-thumb:hover {
@@ -129,24 +131,18 @@
 
         @keyframes scroll {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Posouváme o 50%, protože máme 4 sady log (2+2) */
+            100% { transform: translateX(-50%); } 
         }
 
         .animate-scroll {
-            /* Vynucení šířky podle obsahu */
             width: max-content !important;
-            min-width: 200%; /* Pojistka: musí být širší než obrazovka */
-            
+            min-width: 200%;
             display: flex !important;
             flex-wrap: nowrap !important;
             align-items: center;
             gap: 0 !important;
-            
-            /* Optimalizace pro mobily - drží to v paměti GPU */
             will-change: transform; 
-            
-            /* Základní rychlost PC */
-            animation: scroll 60s linear infinite !important; /* Delší čas, protože pás je teď 4x delší */
+            animation: scroll 60s linear infinite !important;
         }
 
         .partner-logo {
@@ -156,7 +152,7 @@
             justify-content: center;
             align-items: center;
             height: 100px !important;
-            margin: 0 40px !important; /* Větší mezera na PC */
+            margin: 0 40px !important; 
         }
 
         .partner-logo img {
@@ -167,7 +163,6 @@
             filter: grayscale(100%);
             opacity: 0.8;
             transition: all 0.3s ease;
-            /* Zákaz výběru obrázku, aby se nerozbilo tahání prstem */
             user-select: none; 
             -webkit-user-drag: none;
         }
@@ -181,16 +176,12 @@
         /* MOBILNÍ NASTAVENÍ */
         @media (max-width: 768px) {
             .animate-scroll {
-                /* Rychlost pro mobil (15-20s je teď ideál, když je pás 4x delší) */
                 animation-duration: 20s !important; 
             }
-            
             .partner-logo {
-                /* Na mobilu menší mezery a loga */
                 margin: 0 15px !important; 
                 min-width: 120px !important;
             }
-            
             .partner-logo img {
                 max-height: 55px !important;
             }
@@ -202,9 +193,8 @@
             width: 100%;
         }
         
-        /* Specific styling for the FAQ cards */
         .faq-card {
-            border: 1px solid #D6E6FF; /* brand-border */
+            border: 1px solid #D6E6FF; 
             background-color: #ffffff;
             transition: box-shadow 0.3s;
         }
@@ -212,13 +202,11 @@
             box-shadow: 0 4px 12px rgba(11, 58, 122, 0.1);
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #0B3A7A; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #082855; }
 
-        /* LOGO STYLY HEADER */
         .logo-img-style {
             width: 100%;
             height: 100%;
@@ -241,14 +229,13 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="window.location.href='/'">
                     <div id="logo-icon" class="bg-white text-brand-dark font-bold w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 shadow-sm overflow-hidden relative">
-                        <!-- Logo obrázek s inverzním efektem -->
                         <div id="logo-img-container" class="w-full h-full p-2 flex items-center justify-center">
                             <img id="logo-img" src="logo_M_white.png" alt="Marek Marek Logo" class="logo-img-style" 
                                  onerror="this.style.display='none'; if(this.parentElement) this.parentElement.innerHTML='M';">
                         </div>
                     </div>
                     <div class="flex flex-col leading-tight">
-                        <span id="logo-text" class="text-lg font-bold text-white transition-colors duration-300">Marek Marek<span class="text-brand-orange">.</span></span>
+                        <span id="logo-text" class="text-lg font-bold text-white transition-colors duration-300">Marek Marek<span class="text-brand-gold">.</span></span>
                         <span id="logo-subtext" class="text-[0.6rem] text-slate-300 font-bold tracking-widest uppercase transition-colors duration-300">Finanční partner</span>
                     </div>
                 </div>
@@ -264,7 +251,7 @@
 
                 <!-- Hamburger -->
                 <div class="flex items-center">
-                    <button id="mobile-menu-btn" class="text-brand-orange hover:text-brand-gold focus:outline-none p-2 transition-colors rounded-full hover:bg-white/10">
+                    <button id="mobile-menu-btn" class="text-brand-gold hover:text-brand-lightgold focus:outline-none p-2 transition-colors rounded-full hover:bg-white/10">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -287,7 +274,7 @@
                     <p class="px-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 mt-6">Nástroje</p>
                     <div class="space-y-2">
                         <a href="/hypotecnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
-                            <i class="fas fa-landmark w-5 h-5 text-[#ea8d00] mr-3 flex items-center justify-center"></i> Hypoteční kalkulačka
+                            <i class="fas fa-landmark w-5 h-5 text-brand-darkgold mr-3 flex items-center justify-center"></i> Hypoteční kalkulačka
                         </a>
                         <a href="/investicnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-[#EAF3FF]/50 rounded-xl border border-[#D6E6FF]/50 hover:bg-[#EAF3FF] mobile-nav-link">
                             <i class="fas fa-chart-line w-5 h-5 text-[#0B3A7A] mr-3 flex items-center justify-center"></i> Investiční kalkulačka
@@ -317,13 +304,13 @@
 
                 <!-- HLAVIČKA SEKCE -->
                 <div class="bg-gradient-to-br from-brand-dark to-[#1e3a6e] rounded-3xl p-8 md:p-12 text-white mb-10 shadow-2xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-orange opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-gold opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                     
                     <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start gap-8">
                         <div class="flex-1">
                             <h1 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
                                 Investiční kalkulačka – výpočet<br>
-                                <span class="text-brand-orange">hodnoty investice v čase</span>
+                                <span class="text-brand-gold">hodnoty investice v čase</span>
                             </h1>
                             <p class="text-blue-100 opacity-90 text-lg mb-8 max-w-2xl leading-relaxed">
                                 Spočítejte si orientačně, jak se může vyvíjet vaše pravidelná investice v čase podle zvolené strategie. 
@@ -334,7 +321,7 @@
                             <div class="flex flex-col gap-4">
                                 <label class="text-xs font-bold text-blue-200 uppercase tracking-widest">Vyberte strategii</label>
                                 <div class="inline-flex bg-slate-900/50 p-1.5 rounded-xl backdrop-blur-md border border-white/10 w-fit flex-wrap gap-1">
-                                    <button class="profile-tab active px-5 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-orange text-white shadow-lg flex items-center gap-2" data-profile="0" onclick="switchProfile(0)">
+                                    <button class="profile-tab active px-5 py-3 rounded-lg text-sm font-bold transition-all duration-200 bg-brand-gold text-brand-dark shadow-lg flex items-center gap-2" data-profile="0" onclick="switchProfile(0)">
                                         <i class="fas fa-shield-alt"></i> Konzervativní
                                     </button>
                                     <button class="profile-tab px-5 py-3 rounded-lg text-sm font-bold transition-all duration-200 text-slate-300 hover:text-white hover:bg-white/10 flex items-center gap-2" data-profile="1" onclick="switchProfile(1)">
@@ -353,7 +340,7 @@
                                 <span class="text-xs font-bold text-slate-500 uppercase">Předpokládaný výnos</span>
                                 <div class="flex items-baseline gap-1">
                                     <span id="headerRateDisplay" class="font-extrabold text-4xl text-brand-dark">7</span>
-                                    <span class="font-bold text-xl text-brand-orange">% p.a.</span>
+                                    <span class="font-bold text-xl text-brand-gold">% p.a.</span>
                                 </div>
                                 <span id="headerProfileName" class="text-xs font-medium text-slate-400">Vyvážený profil</span>
                             </div>
@@ -365,7 +352,7 @@
                 <div class="mt-8 mb-10 max-w-7xl mx-auto px-4">
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
                         <h3 class="text-base font-bold text-[#0a0f29] mb-3 flex items-center gap-2">
-                            <i class="fas fa-info-circle w-4 h-4 text-[#ea8d00]"></i>
+                            <i class="fas fa-info-circle w-4 h-4 text-brand-gold"></i>
                             Informace ke kalkulaci
                         </h3>
                         <div class="text-slate-600 space-y-2 leading-relaxed text-xs md:text-sm">
@@ -399,7 +386,7 @@
                                 <label class="text-sm font-bold text-slate-600 tracking-wide">
                                     <span class="uppercase">Počáteční vklad</span> <span class="text-slate-400 font-normal normal-case">(v Kč)</span>
                                 </label>
-                                <input type="text" id="initialDepositDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-orange outline-none w-56 bg-transparent transition-colors p-1" value="100 000">
+                                <input type="text" id="initialDepositDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-gold outline-none w-56 bg-transparent transition-colors p-1" value="100 000">
                             </div>
                             <input type="range" id="initialRange" min="0" max="2000000" step="10000" value="100000" class="w-full">
                             <div class="flex justify-between text-xs font-medium text-slate-400 mt-2">
@@ -414,7 +401,7 @@
                                 <label class="text-sm font-bold text-slate-600 tracking-wide">
                                     <span class="uppercase">Měsíční investice</span> <span class="text-slate-400 font-normal normal-case">(v Kč)</span>
                                 </label>
-                                <input type="text" id="monthlyDepositDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-orange outline-none w-56 bg-transparent transition-colors p-1" value="5 000">
+                                <input type="text" id="monthlyDepositDisplay" class="text-right font-extrabold text-3xl text-brand-dark border-b-2 border-slate-200 focus:border-brand-gold outline-none w-56 bg-transparent transition-colors p-1" value="5 000">
                             </div>
                             <input type="range" id="monthlyRange" min="500" max="50000" step="500" value="5000" class="w-full">
                             <div class="flex justify-between text-xs font-medium text-slate-400 mt-2">
@@ -452,7 +439,7 @@
                     <div class="lg:col-span-5">
                         <div class="bg-brand-dark text-white rounded-2xl shadow-2xl shadow-brand-dark/30 border border-slate-800 p-8 overflow-hidden relative h-full flex flex-col justify-between">
                             <div class="absolute top-0 right-0 w-48 h-48 bg-brand-main opacity-20 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
+                            <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-gold opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
 
                             <div>
                                 <h3 class="text-slate-400 font-medium mb-2 relative z-10 text-sm uppercase tracking-wider">Předpokládaná hodnota</h3>
@@ -483,7 +470,7 @@
                             </div>
 
                             <div class="mt-8 relative z-10">
-                                <button onclick="openModal()" class="group relative w-full bg-gradient-to-r from-brand-orange to-brand-gold hover:to-brand-orange text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden">
+                                <button onclick="openModal()" class="group relative w-full bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-brand-gold/30 transition-all transform hover:scale-[1.02] overflow-hidden">
                                     <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                                     <div class="relative flex items-center justify-center gap-3">
                                         <span class="text-lg uppercase">Chci investiční plán</span>
@@ -504,7 +491,7 @@
                     <!-- Graf 1: Projekce -->
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-brand-border/60 flex flex-col text-center">
                         <h3 class="text-lg font-bold text-brand-dark flex items-center justify-center gap-2 mb-4">
-                            <i class="fas fa-chart-line text-brand-orange"></i>
+                            <i class="fas fa-chart-line text-brand-gold"></i>
                             Projekce vývoje
                         </h3>
                         <div class="flex-1 min-h-[300px] chart-container">
@@ -518,7 +505,7 @@
 
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-brand-border/60 flex flex-col text-center">
                         <h3 class="text-lg font-bold text-brand-dark flex items-center justify-center gap-2 mb-4">
-                            <i class="fas fa-chart-pie text-brand-orange"></i>
+                            <i class="fas fa-chart-pie text-brand-gold"></i>
                             Složení portfolia
                         </h3>
                         <div class="flex-1 flex flex-col justify-center items-center gap-6">
@@ -538,7 +525,7 @@
                         <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-4">
                             <div>
                                 <h3 class="text-2xl md:text-3xl font-bold text-brand-dark flex items-center gap-3">
-                                    <i class="fas fa-history text-brand-orange"></i>
+                                    <i class="fas fa-history text-brand-gold"></i>
                                     Simulace historického vývoje
                                 </h3>
                                 <p class="text-slate-600 mt-2 text-lg">
@@ -589,15 +576,15 @@
                 <!-- ZÁVĚREČNÁ CTA (INVESTIČNÍ PLÁN - Modrý box) -->
                 <div class="mt-12 lg:col-span-12">
                     <div class="bg-gradient-to-r from-brand-dark to-[#1e3a6e] rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden text-center">
-                        <div class="absolute top-0 right-0 w-48 h-48 bg-brand-orange opacity-10 rounded-full blur-2xl -mr-10 -mt-10"></div>
-                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-orange opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-brand-gold opacity-10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 bg-brand-gold opacity-10 rounded-full blur-xl -ml-10 -mb-10"></div>
 
                         <h2 class="text-3xl font-extrabold text-white mb-4 relative z-10">Chcete investiční plán přizpůsobený vaší situaci?</h2>
                         <p class="text-lg text-blue-100 max-w-3xl mx-auto mb-8 relative z-10">
                             Výsledek z kalkulačky může sloužit jako základ pro sestavení konkrétní investiční strategie podle vašich cílů, příjmů a časového horizontu.
                         </p>
                         <!-- FIXED: Now triggers openModal() like the top CTA -->
-                        <button onclick="openModal()" class="group relative inline-block w-full sm:w-auto bg-gradient-to-r from-brand-orange to-brand-gold hover:to-brand-orange text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline text-center">
+                        <button onclick="openModal()" class="group relative inline-block w-full sm:w-auto bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-brand-gold/30 transition-all transform hover:scale-[1.02] overflow-hidden no-underline text-center">
                             <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                             <div class="relative flex items-center justify-center gap-3 text-lg uppercase tracking-wider">
                                 Chci investiční plán
@@ -609,13 +596,13 @@
 
                 <!-- DOPLŇKOVÁ CTA: SPOČÍTEJTE SI SAMI (NOVÁ VERZE - 3 KARTY) -->
                 <div class="max-w-7xl mx-auto mt-20 mb-20 pt-10 border-t border-brand-border/50 lg:col-span-12">
-                    <h3 class="text-2xl font-bold text-[#0a0f29] mb-8 text-center uppercase tracking-widest">Spočítejte si sami</h3>
+                    <h3 class="text-2xl font-bold text-[#0a0f29] mb-8 text-center">Spočítejte si sami</h3>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         
                         <!-- Card 1: Hypotéka -->
-                        <a href="/hypotecnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                        <a href="/hypotecnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-lightgold/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold transition-colors duration-300">
                                 <i class="fas fa-calculator text-2xl"></i>
                             </div>
                             <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Hypoteční kalkulačka</h4>
@@ -623,8 +610,8 @@
                         </a>
 
                         <!-- Card 2: Penze -->
-                        <a href="/penzijnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                        <a href="/penzijnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-lightgold/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold transition-colors duration-300">
                                 <i class="fas fa-piggy-bank text-2xl"></i>
                             </div>
                             <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Penzijní kalkulačka</h4>
@@ -632,8 +619,8 @@
                         </a>
 
                         <!-- Card 3: Životní pojištění -->
-                        <a href="/zivotnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
-                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                        <a href="/zivotnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-lightgold/30 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold transition-colors duration-300">
                                 <i class="fas fa-heart-pulse text-2xl"></i>
                             </div>
                             <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Životní pojištění</h4>
@@ -702,7 +689,7 @@
                 <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-8 border-b border-slate-100">
                     <h3 class="text-2xl font-bold text-brand-dark uppercase tracking-wide">Mám zájem o plán</h3>
                     <p class="text-sm text-slate-600 mt-2 flex items-center gap-2">
-                        <i class="fas fa-chart-line text-brand-orange"></i>
+                        <i class="fas fa-chart-line text-brand-gold"></i>
                         <span>Strategie: <strong id="modalProfileName" class="text-brand-main">--</strong></span>
                     </p>
                 </div>
@@ -714,18 +701,18 @@
                                 <label class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">E-mail <span class="text-red-500">*</span></label>
                                 <div class="relative">
                                     <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
-                                    <input type="email" name="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                                    <input type="email" name="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Telefon <span class="text-slate-400 font-normal normal-case">(nepovinné)</span></label>
                                 <div class="relative">
                                     <i class="fas fa-phone absolute left-4 top-3.5 text-slate-400"></i>
-                                    <input type="tel" name="telefon" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                                    <input type="tel" name="telefon" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
                                 </div>
                             </div>
                             <div class="flex items-start gap-3 mt-2 bg-blue-50/50 p-3 rounded-lg">
-                                <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-orange rounded border-slate-300 focus:ring-brand-orange cursor-pointer">
+                                <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-gold rounded border-slate-300 focus:ring-brand-gold cursor-pointer">
                                 <label for="consent" class="text-xs text-slate-600 cursor-pointer select-none">
                                     Souhlasím se zpracováním osobních údajů pro účely vytvoření investičního plánu.
                                 </label>
@@ -767,11 +754,11 @@
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-brand-orange transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-orange transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-orange transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-brand-orange transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-brand-orange transition">Podnikatelé a firmy</a></li>
+                        <li><a href="/#sluzby" class="hover:text-brand-gold transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-gold transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-gold transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-brand-gold transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-brand-gold transition">Podnikatelé a firmy</a></li>
                     </ul>
                 </div>
 
@@ -779,15 +766,15 @@
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-orange"></i>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"></i>
                             <span>Jana z Dražic 99<br>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-brand-orange"></i>
+                            <i class="fas fa-phone mr-3 text-brand-gold"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-brand-orange"></i>
+                            <i class="fas fa-envelope mr-3 text-brand-gold"></i>
                             <a href="mailto:kontakt@marek-marek.cz">kontakt@marek-marek.cz</a>
                         </li>
                     </ul>
@@ -1001,7 +988,7 @@
             if (!els.faqContainer) return;
             els.faqContainer.innerHTML = faqData.map((item, index) => `
                 <div class="faq-card rounded-xl shadow-sm mb-4 border border-slate-100">
-                    <button class="w-full text-left py-4 px-6 flex justify-between items-center transition-colors hover:text-brand-orange focus:outline-none" onclick="toggleFaq(${index})">
+                    <button class="w-full text-left py-4 px-6 flex justify-between items-center transition-colors hover:text-brand-gold focus:outline-none" onclick="toggleFaq(${index})">
                         <h4 class="text-lg font-bold text-slate-900">${item.question}</h4>
                         <i id="faq-icon-${index}" class="fas fa-chevron-down text-sm transition-transform text-brand-main shrink-0 ml-4"></i>
                     </button>
@@ -1017,14 +1004,14 @@
                 const prevAnswer = document.getElementById(`faq-answer-${openFaq}`);
                 const prevIcon = document.getElementById(`faq-icon-${openFaq}`);
                 if (prevAnswer) { prevAnswer.style.maxHeight = '0'; prevAnswer.style.opacity = '0'; }
-                if (prevIcon) { prevIcon.classList.remove('rotate-180', 'text-brand-orange'); prevIcon.classList.add('text-brand-main'); }
+                if (prevIcon) { prevIcon.classList.remove('rotate-180', 'text-brand-gold'); prevIcon.classList.add('text-brand-main'); }
             }
             openFaq = newOpenFaq;
             if (openFaq !== null) {
                 const currentAnswer = document.getElementById(`faq-answer-${openFaq}`);
                 const currentIcon = document.getElementById(`faq-icon-${openFaq}`);
                 if (currentAnswer) { currentAnswer.style.maxHeight = currentAnswer.scrollHeight + 50 + 'px'; currentAnswer.style.opacity = '1'; }
-                if (currentIcon) { currentIcon.classList.add('rotate-180', 'text-brand-orange'); currentIcon.classList.remove('text-brand-main'); }
+                if (currentIcon) { currentIcon.classList.add('rotate-180', 'text-brand-gold'); currentIcon.classList.remove('text-brand-main'); }
             }
         }
 
@@ -1033,10 +1020,10 @@
             const els = getEls();
             els.tabs.forEach(t => {
                 if(parseInt(t.dataset.profile) === index) {
-                    t.classList.add('bg-brand-orange', 'text-white', 'shadow-lg');
+                    t.classList.add('bg-brand-gold', 'text-brand-dark', 'shadow-lg');
                     t.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-white/10');
                 } else {
-                    t.classList.remove('bg-brand-orange', 'text-white', 'shadow-lg');
+                    t.classList.remove('bg-brand-gold', 'text-brand-dark', 'shadow-lg');
                     t.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-white/10');
                 }
             });
