@@ -28,11 +28,11 @@
                         },
                         brand: {
                             dark: '#0a0f29',    /* Midnight Blue */
-                            gold: '#f59e0b',    /* ZLATÁ (Amber 500) */
+                            gold: '#fbbf24',    /* ZLATÁ (Amber 500) */
                             lightgold: '#fde047', /* Světlejší žlutá pro gradienty */
                             main: '#0B3A7A',    
                             light: '#EAF3FF',  
-                            border: '#D6E6FF',  
+                            border: '#D6E6FF',  /* Světlá pro ohraničení */
                         }
                     },
                     fontFamily: {
@@ -72,6 +72,17 @@
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid rgba(11, 58, 122, 0.1);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            padding: 0.6rem 1rem;
+            border-radius: 9999px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
         }
 
         /* Hero Text Gradient (Zlatá -> Žlutá -> Bílá) */
@@ -124,67 +135,76 @@
             padding: 0;
             margin: 0;
         }
+
+        /* Mobile Menu utils */
+        .mobile-menu-active { display: flex; }
+        .mobile-menu-inactive { display: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- --- HEADER --- -->
+    <!-- --- HEADER (NOVÝ Z SOUBORU) --- -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 glass-header-top">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center gap-4">
-          
+                
+                <!-- Logo -->
                 <a href="/" class="flex items-center gap-3 cursor-pointer shrink-0">
+                    <!-- LOGO IMAGE CONTAINER -->
                     <div id="logo-icon" class="font-bold w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 shadow-sm overflow-hidden bg-white">
+                        <!-- Logo obrázek s inverzní logikou (na začátku invertovaný = černý v bílém kruhu) -->
                         <img src="logo_M_white.png" id="logo-image" alt="Logo" class="w-full h-full object-contain p-1.5 transition-all duration-300 invert">
                     </div>
-    
                     <div class="flex flex-col leading-tight">
-                        <span id="logo-text" class="text-lg font-bold transition-colors duration-300 text-white">Marek Marek<span class="text-brand-gold">.</span></span>
+                        <span id="logo-text" class="text-lg font-bold transition-colors duration-300 text-white">Marek Marek<span class="text-[#ea8d00]">.</span></span>
                         <span id="logo-subtext" class="text-[0.6rem] font-bold tracking-widest uppercase transition-colors duration-300 text-slate-300">Finanční partner</span>
                     </div>
                 </a>
                 
-                <!-- Desktop Menu (CAPSLOCK) -->
-                <div class="hidden lg:flex items-center justify-center flex-1 gap-1">
-                    <a href="/#sluzby" class="nav-link text-white text-sm font-semibold px-3 py-2 rounded-lg transition duration-200 uppercase">SLUŽBY</a>
-                    <div id="nav-divider" class="h-4 w-px bg-white/20 mx-2 transition-colors duration-300"></div>
-                    <a href="/financni-plan/" class="nav-link text-white text-sm font-semibold px-3 py-2 rounded-lg transition duration-200 uppercase">RODINY A JEDNOTLIVCI</a>
-                    <div id="nav-divider-2" class="h-4 w-px bg-white/20 mx-2 transition-colors duration-300"></div>
-                    <a href="/podnikatele/" class="nav-link text-white text-sm font-semibold px-3 py-2 rounded-lg transition duration-200 uppercase">PODNIKATELÉ A FIRMY</a>
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center justify-center flex-1 gap-6">
+                    <a href="/#sluzby" class="nav-link text-white hover:bg-white/10">Služby</a>
+                    <div id="nav-divider" class="h-4 w-px mx-2 transition-colors duration-300 bg-white/20"></div>
+                    <a href="/financni-plan/" class="nav-link text-white hover:bg-white/10">Rodiny a jednotlivci</a>
+                    <div id="nav-divider-2" class="h-4 w-px mx-2 transition-colors duration-300 bg-white/20"></div>
+                    <a href="/podnikatele/" class="nav-link text-white hover:bg-white/10">Podnikatelé a firmy</a>
                 </div>
-    
+
+                <!-- Hamburger (Zobrazuje se VŠUDE) -->
                 <div class="flex items-center">
-                    <button id="mobile-menu-btn" class="hover:text-brand-gold focus:outline-none p-2 rounded-full transition-colors text-brand-gold">
+                    <button id="mobile-menu-btn" class="hover:text-[#fbbf24] focus:outline-none p-2 rounded-full transition-colors text-[#ea8d00]">
                         <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
                         <i data-lucide="x" id="close-icon" class="w-6 h-6 hidden"></i>
                     </button>
                 </div>
             </div>
         </div>
-    
-        <!-- Mobile Menu -->
+
+        <!-- Mobile Menu Dropdown -->
         <div id="mobile-menu" class="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-t border-slate-100 shadow-xl py-6 px-4 flex-col gap-4 z-40 hidden"> 
             
+            <!-- Hlavní nabídka -->
             <div>
                 <p class="px-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Hlavní nabídka</p>
                 <div class="space-y-1">
-                    <a href="/#sluzby" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link uppercase">SLUŽBY</a>
-                    <a href="/financni-plan/" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link uppercase">RODINY A JEDNOTLIVCI</a>
-                    <a href="/podnikatele/" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link uppercase">PODNIKATELÉ A FIRMY</a>
+                    <a href="/#sluzby" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link">Služby</a>
+                    <a href="/financni-plan/" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link">Rodiny a jednotlivci</a>
+                    <a href="/podnikatele/" class="block px-4 py-3 text-lg font-bold text-slate-800 rounded-xl hover:bg-slate-50 mobile-nav-link">Podnikatelé a firmy</a>
                 </div>
             </div>
             
+            <!-- Nástroje -->
             <div class="pt-4">
                 <p class="px-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 mt-6">Nástroje</p>
                 <div class="space-y-2">
-                    <a href="#kalkulacka" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-brand-gold/10 rounded-xl border border-brand-gold/20 hover:bg-brand-gold/20 mobile-nav-link">
-                        <i data-lucide="calculator" class="w-5 h-5 text-brand-gold mr-3"></i> Penzijní kalkulačka
-                    </a>
                     <a href="/hypotecnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-[#EAF3FF]/50 rounded-xl border border-[#D6E6FF]/50 hover:bg-[#EAF3FF] mobile-nav-link">
-                        <i data-lucide="landmark" class="w-5 h-5 text-brand-gold mr-3"></i> Hypoteční kalkulačka
+                        <i data-lucide="landmark" class="w-5 h-5 text-[#ea8d00] mr-3"></i> Hypoteční kalkulačka
                     </a>
                     <a href="/investicnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
                         <i data-lucide="trending-up" class="w-5 h-5 text-[#0B3A7A] mr-3"></i> Investiční kalkulačka
+                    </a>
+                    <a href="https://www.marek-marek.cz/penzijnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
+                        <i data-lucide="piggy-bank" class="w-5 h-5 text-[#0B3A7A] mr-3"></i> Penzijní kalkulačka
                     </a>
                     <a href="/zivotnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
                         <i data-lucide="heart-pulse" class="w-5 h-5 text-red-500 mr-3"></i> Kalkulačka životního pojištění
@@ -192,6 +212,7 @@
                 </div>
             </div>
             
+            <!-- CTA - Kontakt -->
             <div class="pt-8 px-4">
                 <a href="/#kontakt" class="block w-full py-4 bg-[#0a0f29] text-white text-center rounded-xl font-bold shadow-lg shadow-[#0a0f29]/20 mobile-nav-link">KONTAKT</a>
             </div>
@@ -526,50 +547,49 @@
     </section>
     
     <!-- --- 4. ROZCESTNÍK (Nástroje - přesunuto dolů) --- -->
-    <section id="nastroje" class="py-24 bg-brand-light relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-brand-dark mb-4">Nástroje, které už možná znáte</h2>
-                <p class="text-slate-600">Používáte je správně?</p>
-            </div>
+    <!-- ROZCESTNÍK KALKULAČEK -->
+    <div id="nastroje" class="max-w-7xl mx-auto mt-20 mb-20 pt-10 border-t border-brand-border/50">
+        <h3 class="text-2xl font-bold text-[#0a0f29] mb-8 text-center">Spočítejte si sami</h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1: Investice (Jemný Gradient Hover) -->
-                <a href="https://www.marek-marek.cz/investicnikalkulacka/" class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-brand-gold/50 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-brand-dark text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                        <i data-lucide="trending-up" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-brand-dark group-hover:text-brand-gold mb-2 transition-colors duration-300">Investiční kalkulačka</h4>
-                    <p class="text-slate-500 text-sm transition-colors duration-300">Zhodnocování úspor a tvorba renty na stáří.</p>
-                </a>
-                
-                <!-- Card 2: Hypotéky (Jemný Gradient Hover) -->
-                <a href="https://www.marek-marek.cz/hypotecnikalkulacka/" class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-brand-gold/50 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-brand-dark text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                        <i data-lucide="landmark" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-brand-dark group-hover:text-brand-gold mb-2 transition-colors duration-300">Hypotéky a úvěry</h4>
-                    <p class="text-slate-500 text-sm transition-colors duration-300">Financování bydlení a optimalizace závazků.</p>
-                </a>
-                
-                <!-- Card 3: Pojištění (Jemný Gradient Hover) -->
-                <a href="https://www.marek-marek.cz/zivotnikalkulacka/" class="group bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:border-brand-gold/50 hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center h-full hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20">
-                    <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-brand-dark text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                        <i data-lucide="heart-pulse" class="w-8 h-8"></i>
-                    </div>
-                    <h4 class="text-lg font-bold text-brand-dark group-hover:text-brand-gold mb-2 transition-colors duration-300">Životní pojištění</h4>
-                    <p class="text-slate-500 text-sm transition-colors duration-300">Výpočet potřebného krytí pro zajištění rodiny a příjmů.</p>
-                </a>
-            </div>
-        </div>
-    </section>
+            <!-- Card 1: Investice -->
+            <a href="/investicnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                <!-- Ikona v kroužku (mění barvu při hoveru celé karty díky 'group-hover') -->
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                    <i class="fas fa-chart-line text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Investiční kalkulačka</h4>
+                <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Zhodnocování úspor a tvorba renty na stáří.</p>
+            </a>
 
-    <!-- --- FOOTER --- -->
-    <footer class="bg-[#0a0f29] text-slate-400 py-16 border-t border-white/10" id="kontakt">
+            <!-- Card 2: Penze -->
+            <a href="https://www.marek-marek.cz/penzijnikalkulacka" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                    <i class="fas fa-piggy-bank text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Penzijní kalkulačka</h4>
+                <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Spočítejte si realitu státního důchodu a nutné úspory.</p>
+            </a>
+
+                <!-- Card 3: Životní pojištění -->
+                <a href="/zivotnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
+                    <i class="fas fa-heart-pulse text-2xl"></i>
+                </div>
+                <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Životní pojištění</h4>
+                <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Výpočet potřebného krytí pro zajištění rodiny a příjmů.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- --- FOOTER (NOVÝ Z SOUBORU) --- -->
+    <footer class="bg-[#0a0f29] text-slate-400 py-16 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-2 mb-4">
+                        <!-- PŘIDÁNO: Logo místo M, invertované aby bylo černé na bílém podkladu čtverečku -->
                         <div class="bg-white w-8 h-8 flex items-center justify-center rounded">
                              <img src="logo_M_white.png" alt="M" class="w-6 h-6 object-contain invert">
                         </div>
@@ -585,36 +605,36 @@
                         <a href="http://wa.me/420778511166" class="text-slate-400 hover:text-white transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
                     </div>
                 </div>
-    
+
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-brand-gold transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-gold transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-gold transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-brand-gold transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-brand-gold transition">Podnikatelé a firmy</a></li>
+                        <li><a href="/#sluzby" class="hover:text-[#ea8d00] transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-[#ea8d00] transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-[#ea8d00] transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-[#ea8d00] transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-[#ea8d00] transition">Podnikatelé a firmy</a></li>
                     </ul>
                 </div>
-    
+
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i data-lucide="map-pin" class="w-4 h-4 mt-1 mr-3 text-brand-gold"></i>
+                            <i data-lucide="map-pin" class="w-4 h-4 mt-1 mr-3 text-[#ea8d00]"></i>
                             <span>Jana z Dražic 99<br/>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i data-lucide="phone" class="w-4 h-4 mr-3 text-brand-gold"></i>
+                            <i data-lucide="phone" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-brand-gold"></i>
+                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
                             <a href="mailto:kontakt@marek-marek.cz" class="hover:text-white transition">kontakt@marek-marek.cz</a>
                         </li>
                     </ul>
                 </div>
-    
+
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Informace</h4>
                     <ul class="space-y-2 text-sm">
@@ -623,7 +643,7 @@
                     </ul>
                 </div>
             </div>
-    
+
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
                 <p>&copy; 2025 Marek Marek. Všechna práva vyhrazena.</p>
             </div>
@@ -719,7 +739,7 @@
                 });
 
                 // Button menu
-                mobileMenuBtn.className = 'hover:text-[#f59e0b] focus:outline-none p-2 rounded-full transition-colors text-[#f59e0b] hover:bg-slate-100';
+                mobileMenuBtn.className = 'hover:text-[#fbbf24] focus:outline-none p-2 rounded-full transition-colors text-[#ea8d00] hover:bg-slate-100';
                 
             } 
             // Když jsme nahoře
@@ -751,7 +771,7 @@
                 });
 
                 // Button menu
-                mobileMenuBtn.className = 'hover:text-[#f59e0b] focus:outline-none p-2 rounded-full transition-colors text-[#f59e0b] hover:bg-white/10';
+                mobileMenuBtn.className = 'hover:text-[#fbbf24] focus:outline-none p-2 rounded-full transition-colors text-[#ea8d00] hover:bg-white/10';
             }
         };
 
