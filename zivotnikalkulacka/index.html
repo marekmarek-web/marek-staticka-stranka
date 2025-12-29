@@ -231,14 +231,19 @@
     <div class="py-8 px-4 md:py-12 mt-6 md:mt-16">
         <div class="max-w-7xl mx-auto">
             
-            <!-- HERO CONTAINER START (Nový design) -->
-            <div class="bg-gradient-to-br from-[#0a0f29] to-[#1e3a6e] rounded-3xl p-8 md:p-12 text-white mb-10 shadow-2xl relative overflow-hidden font-sans">
+            <!-- HERO CONTAINER START (Nový design - OPRAVA TOOLTIPŮ) -->
+            <!-- Změna: Odstraněno overflow-hidden a styly pozadí z hlavního obalu, aby tooltipy mohly přetékat -->
+            <div class="relative mb-10 shadow-2xl rounded-3xl font-sans">
     
-                <!-- Dekorativní prvky na pozadí (Záře) -->
-                <div class="absolute top-0 right-0 w-96 h-96 bg-[#ea8d00] opacity-10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                <!-- 1. Vrstva: Pozadí a dekorace (izolované oříznutí pro zachování rounded rohů u pozadí) -->
+                <div class="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f29] to-[#1e3a6e]"></div>
+                    <!-- Dekorativní prvky na pozadí (Záře) -->
+                    <div class="absolute top-0 right-0 w-96 h-96 bg-[#ea8d00] opacity-10 rounded-full blur-3xl -mr-20 -mt-20"></div>
+                </div>
                 
-                <!-- Hlavní obsah -->
-                <div class="relative z-10 flex flex-col lg:flex-row justify-between items-start gap-8">
+                <!-- 2. Vrstva: Hlavní obsah (zde jsou styly pro padding a text) -->
+                <div class="relative z-10 p-8 md:p-12 text-white flex flex-col lg:flex-row justify-between items-start gap-8">
                     
                     <!-- Levá část: Text a Tlačítka (Štítky) -->
                     <div class="flex-1 text-center lg:text-left">
@@ -266,7 +271,7 @@
                                <i data-lucide="trending-up" class="w-4 h-4 text-[#ea8d00]"></i>
                                6% Rentiér
                                
-                               <!-- Tooltip -->
+                               <!-- Tooltip (Nyní bude viditelný i mimo hranice hero sekce) -->
                                <div class="absolute top-full left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 mt-3 w-80 p-4 bg-white text-slate-800 text-xs font-normal rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-slate-100 pointer-events-none transform translate-y-2 group-hover:translate-y-0 text-left">
                                    <p class="leading-relaxed"><strong>Rentiérský výpočet:</strong> Pojistná částka (např. 1 mil. Kč) se zainvestuje s výnosem 6 % p.a. To generuje rentu 60 000 Kč ročně (5 000 Kč měsíčně), která dlouhodobě dorovnává výpadek příjmu při invaliditě.</p>
                                    <div class="absolute -top-2 left-1/2 lg:left-6 -translate-x-1/2 lg:translate-x-0 w-4 h-4 bg-white transform rotate-45 border-t border-l border-slate-100"></div>
