@@ -26,22 +26,23 @@
                     },
                     colors: {
                         slate: {
+                            50: '#f8fafc',
                             850: '#1e293b',
                             900: '#0f172a',
                             950: '#020617',
                         },
                         brand: {
-                            dark: '#0a0f29',   // Hero pozadí
-                            orange: '#ea8d00', // CTA, akcenty
-                            gold: '#fbbf24',   // Jemné detaily
-                            main: '#0B3A7A',   // Hlavní modrá (texty, ikony)
-                            light: '#EAF3FF',  // Pozadí sekcí
-                            border: '#D6E6FF', // Rámečky
+                            dark: '#0a0f29',    /* Midnight Blue */
+                            gold: '#fbbf24',    /* ZLATÁ (Amber 500) - nahrazuje orange */
+                            lightgold: '#fde047', /* Světlejší žlutá pro hover/gradienty */
+                            main: '#0B3A7A',    
+                            light: '#EAF3FF',   
+                            border: '#D6E6FF',  /* Světlá pro ohraničení */
                         },
                     },
                     boxShadow: {
                         'soft': '0 10px 40px -10px rgba(11, 58, 122, 0.08)',
-                        'glow': '0 0 20px rgba(234, 141, 0, 0.4)', 
+                        'glow': '0 0 20px rgba(251, 191, 36, 0.4)', /* Gold glow */
                     },
                     animation: {
                         'shimmer': 'shimmer 2.5s infinite',
@@ -74,16 +75,16 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
         }
 
-        /* CTA Button s animací */
+        /* CTA Button s animací - Aktualizováno na Gold/Lightgold */
         .btn-sweep {
             position: relative;
-            background-color: #ea8d00;
+            background-color: #fbbf24; /* Gold */
             color: #0a0f29; 
             font-weight: 800;
             overflow: hidden;
             transition: all 0.4s ease;
             z-index: 1;
-            box-shadow: 0 4px 14px 0 rgba(234, 141, 0, 0.39);
+            box-shadow: 0 4px 14px 0 rgba(251, 191, 36, 0.39); /* Gold shadow */
         }
 
         .btn-sweep::before {
@@ -93,7 +94,7 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background-color: #fbbf24; 
+            background-color: #fde047; /* Lightgold hover */
             transition: width 0.4s ease;
             z-index: -1;
         }
@@ -103,7 +104,7 @@
         }
 
         .btn-sweep:hover {
-            box-shadow: 0 6px 20px rgba(234, 141, 0, 0.3);
+            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
             transform: translateY(-1px);
         }
 
@@ -140,7 +141,7 @@
                         <img id="logo-img" src="logo_M_white.png" alt="M" class="w-3/5 h-3/5 object-contain invert transition-all duration-300">
                     </div>
                     <div class="flex flex-col leading-tight">
-                        <span id="logo-text" class="text-lg font-bold text-white transition-colors duration-300">Marek Marek<span class="text-brand-orange">.</span></span>
+                        <span id="logo-text" class="text-lg font-bold text-white transition-colors duration-300">Marek Marek<span class="text-brand-gold">.</span></span>
                         <span id="logo-subtext" class="text-[0.6rem] text-slate-300 font-bold tracking-widest uppercase transition-colors duration-300">Finanční partner</span>
                     </div>
                 </div>
@@ -156,7 +157,7 @@
 
                 <!-- Hamburger -->
                 <div class="flex items-center">
-                    <button id="mobile-menu-btn" class="text-brand-orange hover:text-brand-gold focus:outline-none p-2 transition-colors rounded-full hover:bg-white/10">
+                    <button id="mobile-menu-btn" class="text-brand-gold hover:text-brand-lightgold focus:outline-none p-2 transition-colors rounded-full hover:bg-white/10">
                         <i class="fas fa-bars text-2xl"></i>
                     </button>
                 </div>
@@ -179,13 +180,17 @@
                     <p class="px-4 text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 mt-6">Nástroje</p>
                     <div class="space-y-2">
                         <a href="/hypotecnikalkulacka/" class="flex items-center px-4 py-3 text-brand-dark font-bold bg-brand-light/50 rounded-xl border border-brand-border/50">
-                            <i class="fas fa-calculator text-brand-orange mr-3"></i> Hypoteční kalkulačka
+                            <i class="fas fa-calculator text-brand-gold mr-3"></i> Hypoteční kalkulačka
                         </a>
                         <a href="/investicnikalkulacka/" class="flex items-center px-4 py-3 text-brand-dark font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50">
                             <i class="fas fa-chart-line text-brand-main mr-3"></i> Investiční kalkulačka
                         </a>
                         <a href="/zivotnikalkulacka/" class="flex items-center px-4 py-3 text-brand-dark font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50">
                             <i class="fas fa-heart-pulse text-red-500 mr-3"></i> Kalkulačka životního pojištění
+                        </a>
+                        <!-- Nový odkaz na penzijní kalkulačku -->
+                        <a href="/penzijnikalkulacka/" class="flex items-center px-4 py-3 text-[#0a0f29] font-bold bg-white border border-slate-100 rounded-xl hover:bg-slate-50 mobile-nav-link">
+                            <i class="fas fa-piggy-bank w-5 h-5 text-[#0B3A7A] mr-3"></i> Penzijní kalkulačka
                         </a>
                     </div>
                 </div>
@@ -199,10 +204,16 @@
 
     <!-- HERO SECTION -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-36 overflow-hidden bg-brand-dark min-h-screen flex items-center">
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-2/3 h-full bg-brand-main/10 skew-x-12 transform origin-top-right"></div>
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-main/20 rounded-full blur-[100px]"></div>
-        <div class="absolute top-20 right-20 w-80 h-80 bg-brand-orange/10 rounded-full blur-[80px]"></div>
+        <!-- Full Header Background Image with Opacity Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="DSC07148.jpg" alt="Background" class="w-full h-full object-cover">
+            <!-- Overlay pro ztmavení fotky (opacity) -->
+            <div class="absolute inset-0 bg-brand-dark/80"></div>
+        </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 right-0 w-2/3 h-full bg-brand-main/10 skew-x-12 transform origin-top-right z-0 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-main/20 rounded-full blur-[100px] z-0 pointer-events-none"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -217,7 +228,7 @@
 
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.15] tracking-tight">
                         Váš partner pro <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-white">finanční zdraví.</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-gold to-white">finanční zdraví.</span>
                     </h1>
 
                     <p class="text-lg md:text-xl text-slate-300 leading-relaxed max-w-xl font-medium">
@@ -242,7 +253,7 @@
 
                     <!-- CTA -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-6">
-                        <a href="/investicnikalkulacka/" class="group relative w-full sm:w-auto inline-block bg-gradient-to-r from-[#ea8d00] to-[#fbbf24] hover:to-[#ea8d00] text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline text-center">
+                        <a href="/investicnikalkulacka/" class="group relative w-full sm:w-auto inline-block bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-brand-gold/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline text-center">
                             <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                             <div class="relative flex items-center justify-center gap-3">
                                 <i class="fas fa-calculator text-xl text-brand-dark"></i>
@@ -252,23 +263,7 @@
                     </div>
                 </div>
 
-                <!-- Photo -->
-                <div class="relative w-full max-w-md mx-auto lg:max-w-none flex justify-center lg:justify-end">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/10 bg-brand-dark aspect-[3/4] w-full max-w-[400px] group">
-                        <img src="marekuvodni.png.png" 
-                             alt="Marek Marek" 
-                             class="w-full h-full object-cover object-top transition duration-700 group-hover:scale-105"
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full flex-col items-center justify-center bg-brand-dark text-slate-400 p-8 text-center">
-                            <i class="fas fa-user-tie text-6xl mb-4 text-slate-500"></i>
-                            <p>Zde se načte Vaše fotka</p>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-brand-dark to-transparent p-6 pt-24">
-                            <h3 class="text-white text-xl font-bold">Marek Marek</h3>
-                            <p class="text-brand-orange text-xs font-bold uppercase tracking-wide">10 let praxe v oboru</p>
-                        </div>
-                    </div>
-                </div>
+                <div></div>
             </div>
         </div>
     </section>
@@ -277,7 +272,7 @@
     <section id="audit-proces" class="py-24 bg-white relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-brand-orange font-bold tracking-widest uppercase text-xs mb-3 block">Můj postup</span>
+                <span class="text-brand-gold font-bold tracking-widest uppercase text-xs mb-3 block">Můj postup</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark mb-6">Tři kroky k optimální investiční strategii</h2>
                 <p class="text-lg text-slate-600 leading-relaxed font-light">
                     Získejte nezávislé posouzení Vašeho stávajícího portfolia. Proces je transparentní, rychlý a vede k maximálnímu využití Vašeho majetku. Vše začíná u auditu v hodnotě <span class="font-semibold text-brand-dark">20 000 Kč</span>, který máte nyní zdarma.
@@ -287,7 +282,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- 1 -->
                 <div class="bg-brand-light/50 rounded-xl p-8 border border-brand-border relative group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6 relative z-10 border border-brand-border">
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6 relative z-10 border border-brand-border">
                         <i class="fas fa-magnifying-glass-chart"></i>
                     </div>
                     <div class="relative z-10">
@@ -300,7 +295,7 @@
                 </div>
                 <!-- 2 -->
                 <div class="bg-brand-light/50 rounded-xl p-8 border border-brand-border relative group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6 relative z-10 border border-brand-border">
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6 relative z-10 border border-brand-border">
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <div class="relative z-10">
@@ -313,7 +308,7 @@
                 </div>
                 <!-- 3 -->
                 <div class="bg-brand-light/50 rounded-xl p-8 border border-brand-border relative group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg overflow-hidden">
-                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-orange text-2xl mb-6 relative z-10 border border-brand-border">
+                    <div class="w-14 h-14 bg-white rounded-xl flex items-center justify-center text-brand-gold text-2xl mb-6 relative z-10 border border-brand-border">
                         <i class="fas fa-handshake"></i>
                     </div>
                     <div class="relative z-10">
@@ -327,7 +322,7 @@
             </div>
 
             <div class="mt-16 text-center">
-                <a href="#kontakt" class="group relative inline-block w-full sm:w-auto bg-gradient-to-r from-[#ea8d00] to-[#fbbf24] hover:to-[#ea8d00] text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline">
+                <a href="/#kontakt" class="group relative inline-block w-full sm:w-auto bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-8 rounded-xl shadow-lg shadow-brand-gold/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline">
                     <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                     <div class="relative flex items-center justify-center gap-3">
                         <span class="text-lg">Zarezervovat audit a plán ZDARMA</span>
@@ -342,7 +337,7 @@
     <section id="sluzby" class="py-24 bg-brand-light/30 border-t border-brand-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <span class="text-brand-orange font-bold tracking-widest uppercase text-xs mb-2 block">Portfolio</span>
+                <span class="text-brand-gold font-bold tracking-widest uppercase text-xs mb-2 block">Portfolio</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark">Moje služby</h2>
             </div>
 
@@ -472,9 +467,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:flex lg:items-center lg:gap-16">
                 <div class="lg:w-1/2 mb-10 lg:mb-0">
-                    <span class="text-brand-orange font-bold tracking-widest uppercase text-xs">Investiční filozofie</span>
+                    <span class="text-brand-gold font-bold tracking-widest uppercase text-xs">Investiční filozofie</span>
                     <h2 class="text-3xl md:text-4xl font-bold mt-2 mb-6 text-brand-dark">Jak to dělají nejbohatší fondy světa?</h2>
-                    <p class="text-slate-600 mb-6 text-lg">Inspiruji se strategií jako je např. <a href="https://www.nbim.no/" target="_blank" class="text-brand-main hover:text-brand-orange font-bold underline decoration-brand-orange/30">Norský ropný fond</a>. Diverzifikace, nízké náklady a dlouhodobý horizont.</p>
+                    <p class="text-slate-600 mb-6 text-lg">Inspiruji se strategií jako je např. <a href="https://www.nbim.no/" target="_blank" class="text-brand-main hover:text-brand-gold font-bold underline decoration-brand-gold/30">Norský ropný fond</a>. Diverzifikace, nízké náklady a dlouhodobý horizont.</p>
                     
                     <ul class="space-y-4 mb-8">
                         <li class="flex items-start">
@@ -529,7 +524,7 @@
                     
                     <h3 class="text-2xl font-bold text-brand-dark">Nezávazná konzultace</h3>
                     
-                    <a href="javascript:void(0)" onclick="openModal()" class="group relative w-full inline-block bg-gradient-to-r from-[#ea8d00] to-[#fbbf24] hover:to-[#ea8d00] text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline">
+                    <a href="javascript:void(0)" onclick="openModal()" class="group relative w-full inline-block bg-gradient-to-r from-brand-gold to-brand-lightgold hover:to-brand-gold text-brand-dark font-extrabold py-5 px-6 rounded-xl shadow-lg shadow-brand-gold/20 transition-all transform hover:scale-[1.02] overflow-hidden no-underline">
                         <div class="absolute top-0 left-0 w-full h-full bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
                         <div class="relative flex items-center justify-center gap-3">
                             <span class="text-lg">Mám zájem o konzultaci</span>
@@ -552,7 +547,9 @@
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-2 mb-4">
-                        <div class="bg-white text-brand-dark font-bold w-8 h-8 flex items-center justify-center rounded">M</div>
+                        <div class="bg-white text-brand-dark font-bold w-8 h-8 flex items-center justify-center rounded">
+                            <img src="logo_M_white.png" alt="Marek Marek Logo" class="w-full h-full object-contain p-1 invert">
+                        </div>
                         <span class="text-xl font-bold text-white">Marek Marek.</span>
                     </div>
                     <p class="text-sm text-slate-400 mb-4">
@@ -569,11 +566,11 @@
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-brand-orange transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-orange transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-orange transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-brand-orange transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-brand-orange transition">Podnikatelé a firmy</a></li>
+                        <li><a href="/#sluzby" class="hover:text-brand-gold transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-gold transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-gold transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-brand-gold transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-brand-gold transition">Podnikatelé a firmy</a></li>
                     </ul>
                 </div>
 
@@ -581,16 +578,16 @@
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-orange"></i>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"></i>
                             <span>Jana z Dražic 99<br>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-brand-orange"></i>
+                            <i class="fas fa-phone mr-3 text-brand-gold"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-brand-orange"></i>
-                            <a href="mailto:kontakt@marek-marek.cz" class="hover:text-brand-orange transition">kontakt@marek-marek.cz</a>
+                            <i class="fas fa-envelope mr-3 text-brand-gold"></i>
+                            <a href="mailto:kontakt@marek-marek.cz" class="hover:text-brand-gold transition">kontakt@marek-marek.cz</a>
                         </li>
                     </ul>
                 </div>
@@ -613,12 +610,12 @@
     <!-- CONTACT MODAL -->
     <div id="contactModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!-- Backdrop -->
-        <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm transition-opacity opacity-0" id="modalBackdrop"></div>
     
         <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <!-- Modal panel -->
-            <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg scale-95 opacity-0" id="modalContent">
               
               <!-- Close button -->
               <div class="absolute right-4 top-4">
@@ -628,38 +625,52 @@
                 </button>
               </div>
     
-              <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+              <div class="bg-gradient-to-r from-slate-50 to-white px-8 py-8 border-b border-slate-100">
                 <div class="sm:flex sm:items-start">
                   <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
-                    <div class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-brand-light sm:mx-0 sm:h-10 sm:w-10 mb-4">
-                      <i class="fas fa-envelope text-brand-orange text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold leading-6 text-brand-dark" id="modal-title">Nezávazná konzultace</h3>
-                    <div class="mt-2">
-                      <p class="text-sm text-slate-500 mb-6">Zanechte mi kontakt a já se vám ozvu zpět s řešením na míru.</p>
-                      
-                      <form action="https://formspree.io/f/xqezzzpe" method="POST" class="space-y-4">
-                        <input type="hidden" name="_subject" value="Nová poptávka: Hypoteční kalkulačka">
-                        
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
-                            <input type="email" name="email" id="email" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm border p-3 bg-slate-50">
-                        </div>
-                        
-                        <div>
-                            <label for="telefon" class="block text-sm font-medium text-slate-700">Telefon</label>
-                            <input type="tel" name="telefon" id="telefon" required class="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-brand-orange focus:ring-brand-orange sm:text-sm border p-3 bg-slate-50">
-                        </div>
-    
-                        <div class="pt-4">
-                            <button type="submit" class="btn-sweep w-full rounded-xl py-3 text-brand-dark font-bold shadow-lg transform transition hover:scale-[1.02]">
-                                Odeslat poptávku
-                            </button>
-                        </div>
-                      </form>
-                    </div>
+                    <h3 class="text-2xl font-bold leading-6 text-brand-dark uppercase tracking-wide" id="modal-title">Nezávazná konzultace</h3>
+                    <p class="text-sm text-slate-600 mt-2 flex items-center gap-2">
+                        <i class="fas fa-comments text-brand-gold"></i>
+                        <span>Rád s Vámi proberu Vaše možnosti</span>
+                    </p>
                   </div>
                 </div>
+              </div>
+
+              <div class="p-8">
+                  <form action="https://formspree.io/f/xqezzzpe" method="POST" class="space-y-5">
+                    <input type="hidden" name="_subject" value="Nová poptávka: Web Marek Marek">
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Email <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
+                            <input type="email" name="email" id="email" required placeholder="vas@email.cz" class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="telefon" class="block text-sm font-bold text-slate-700 mb-1 uppercase tracking-tighter">Telefon <span class="text-slate-400 font-normal normal-case">(nepovinné)</span></label>
+                        <div class="relative">
+                            <i class="fas fa-phone absolute left-4 top-3.5 text-slate-400"></i>
+                            <input type="tel" name="telefon" id="telefon" placeholder="+420 777 ..." class="w-full border border-slate-300 rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-brand-gold focus:border-transparent outline-none transition-shadow bg-slate-50 focus:bg-white">
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3 mt-2 bg-blue-50/50 p-3 rounded-lg">
+                        <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 text-brand-gold rounded border-slate-300 focus:ring-brand-gold cursor-pointer">
+                        <label for="consent" class="text-xs text-slate-600 cursor-pointer select-none">
+                            Souhlasím se zpracováním osobních údajů.
+                        </label>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="btn-sweep w-full rounded-xl py-4 text-brand-dark font-bold shadow-lg transform transition hover:scale-[1.02] flex items-center justify-center gap-2 text-lg uppercase tracking-wider">
+                            <span>Odeslat nezávazně</span>
+                            <i class="fas fa-paper-plane text-sm"></i>
+                        </button>
+                    </div>
+                  </form>
               </div>
             </div>
           </div>
@@ -669,13 +680,34 @@
     <script>
         // Modal functions
         function openModal() {
-            document.getElementById('contactModal').classList.remove('hidden');
+            const modal = document.getElementById('contactModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+            
+            modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Trigger animations
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                content.classList.remove('opacity-0', 'scale-95');
+                content.classList.add('scale-100');
+            }, 10);
         }
 
         function closeModal() {
-            document.getElementById('contactModal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Re-enable scrolling
+            const modal = document.getElementById('contactModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+            
+            backdrop.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('opacity-0', 'scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // Re-enable scrolling
+            }, 300);
         }
 
         // Close modal when clicking outside
