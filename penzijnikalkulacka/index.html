@@ -157,7 +157,7 @@
                     </div>
                     <div class="flex flex-col leading-tight">
                         <span id="logo-text" class="text-lg font-bold transition-colors duration-300 text-white">Marek Marek<span class="text-[#ea8d00]">.</span></span>
-                        <span id="logo-subtext" class="text-[0.6rem] font-bold tracking-widest uppercase transition-colors duration-300 text-slate-300"> partner</span>
+                        <span id="logo-subtext" class="text-[0.6rem] font-bold tracking-widest uppercase transition-colors duration-300 text-slate-300">Finanční partner</span>
                     </div>
                 </a>
                 
@@ -224,7 +224,11 @@
         
         <!-- Background Elements -->
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f29] via-[#0f172a] to-[#0a0f29] opacity-90"></div>
+            <!-- PŘIDÁNO: Obrázek na pozadí přes celou sekci -->
+            <img src="DSC07165.jpg" alt="Background" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay">
+            
+            <!-- Původní gradienty a efekty (zachováno pro atmosféru) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0a0f29] via-[#0f172a]/90 to-[#0a0f29] opacity-90"></div>
             <div class="absolute top-[-10%] right-[-5%] w-[800px] h-[800px] bg-brand-main/20 rounded-full blur-3xl opacity-40 mix-blend-screen animate-pulse"></div>
             <div class="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-brand-gold/10 rounded-full blur-3xl opacity-30 mix-blend-screen"></div>
             <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
@@ -236,7 +240,7 @@
             <div class="flex-1 max-w-2xl pt-10 lg:pt-0 text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-brand-lightgold text-xs font-bold uppercase tracking-widest mb-8 backdrop-blur-sm">
                     <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
-                    Finanční strategie 2026
+                    Finanční Strategie 2026
                 </div>
                 
                 <h1 class="text-5xl lg:text-7xl font-black text-white leading-[1.1] mb-4 tracking-tight">
@@ -272,6 +276,8 @@
             <div class="flex-1 w-full max-w-[500px] lg:max-w-[600px] relative h-[500px] lg:h-[700px] flex items-end justify-center lg:justify-end pointer-events-none">
                 <div class="relative w-full h-full flex items-end justify-center">
                     <div class="absolute top-20 right-10 w-64 h-64 bg-white/10 blur-[80px] rounded-full"></div>
+                    <!-- ZDE TAKÉ MŮŽETE MÍT FOTKU JAKO "POSTAVU", POKUD CHCETE DUPLICITU, NEBO JI SMAZAT -->
+                    <!-- Ponechávám dle zadání "vše jinak zůstane tak jak je", takže postava vpravo zůstává -->
                     <img src="DSC07165.jpg" alt="Marek Marek" class="relative z-10 object-contain h-full drop-shadow-2xl opacity-90">
                 </div>
             </div>
@@ -563,13 +569,13 @@
                 <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Zhodnocování úspor a tvorba renty na stáří.</p>
             </a>
 
-            <!-- Card 2: Hypotéka -->
-            <a href="https://www.marek-marek.cz/hypotecnikalkulacka" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
+            <!-- Card 2: Hypotéky (Původně Penze) -->
+            <a href="https://www.marek-marek.cz/hypotecnikalkulacka/" class="group bg-white hover:bg-gradient-to-br hover:from-white hover:to-brand-gold/20 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center text-center h-full border border-slate-200 hover:border-brand-gold/30">
                 <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-[#0a0f29] text-white group-hover:bg-brand-gold group-hover:text-white transition-colors duration-300">
-                    <i class="fas fa-calculator text-2xl"></i>
+                    <i class="fas fa-landmark text-2xl"></i>
                 </div>
                 <h4 class="text-lg font-bold text-[#0a0f29] mb-2 transition-colors duration-300">Hypoteční kalkulačka</h4>
-                <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Spočítejte si splátku Vaší hypotéky na základě zadaných parametrů.</p>
+                <p class="text-slate-500 group-hover:text-slate-700 text-sm transition-colors duration-300">Financování bydlení a optimalizace závazků.</p>
             </a>
 
                 <!-- Card 3: Životní pojištění -->
@@ -584,7 +590,7 @@
     </div>
 
     <!-- --- FOOTER (NOVÝ Z SOUBORU) --- -->
-    <footer class="bg-[#0a0f29] text-slate-400 py-16 border-t border-white/10">
+    <footer class="bg-[#0a0f29] text-slate-400 py-16 border-t border-white/10" id="kontakt">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
@@ -599,21 +605,21 @@
                         Pomáhám klientům budovat a chránit majetek pomocí ověřených strategií.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="https://www.instagram.com/marekmarek_pfp/" class="text-slate-400 hover:text-white transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="https://www.facebook.com/SMMarkx" class="text-slate-400 hover:text-white transition"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                        <a href="https://www.linkedin.com/in/marek-marek-489394226/" class="text-slate-400 hover:text-white transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                        <a href="http://wa.me/420778511166" class="text-slate-400 hover:text-white transition"><i data-lucide="message-circle" class="w-5 h-5"></i></a>
+                        <a href="https://www.instagram.com/marekmarek_pfp/" class="text-slate-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="https://www.facebook.com/SMMarkx" class="text-slate-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="https://www.linkedin.com/in/marek-marek-489394226/" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="http://wa.me/420778511166" class="text-slate-400 hover:text-white transition"><i class="fab fa-whatsapp text-xl"></i></a>
                     </div>
                 </div>
 
                 <div>
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Menu</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="/#sluzby" class="hover:text-[#ea8d00] transition">Služby</a></li>
-                        <li><a href="/hypotecnikalkulacka/" class="hover:text-[#ea8d00] transition">Hypoteční kalkulačka</a></li>
-                        <li><a href="/investicnikalkulacka/" class="hover:text-[#ea8d00] transition">Investiční kalkulačka</a></li>
-                        <li><a href="/financni-plan/" class="hover:text-[#ea8d00] transition">Rodiny a jednotlivci</a></li>
-                        <li><a href="/podnikatele/" class="hover:text-[#ea8d00] transition">Podnikatelé a firmy</a></li>
+                        <li><a href="/#sluzby" class="hover:text-brand-gold transition">Služby</a></li>
+                        <li><a href="/hypotecnikalkulacka/" class="hover:text-brand-gold transition">Hypoteční kalkulačka</a></li>
+                        <li><a href="/investicnikalkulacka/" class="hover:text-brand-gold transition">Investiční kalkulačka</a></li>
+                        <li><a href="/financni-plan/" class="hover:text-brand-gold transition">Rodiny a jednotlivci</a></li>
+                        <li><a href="/podnikatele/" class="hover:text-brand-gold transition">Podnikatelé a firmy</a></li>
                     </ul>
                 </div>
 
@@ -621,15 +627,15 @@
                     <h4 class="text-white font-bold mb-4 uppercase text-xs tracking-widest">Kontakt</h4>
                     <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
-                            <i data-lucide="map-pin" class="w-4 h-4 mt-1 mr-3 text-[#ea8d00]"></i>
-                            <span>Jana z Dražic 99<br/>Roudnice nad Labem</span>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-gold"></i>
+                            <span>Jana z Dražic 99<br>Roudnice nad Labem</span>
                         </li>
                         <li class="flex items-center">
-                            <i data-lucide="phone" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
+                            <i class="fas fa-phone mr-3 text-brand-gold"></i>
                             <span>+420 778 511 166</span>
                         </li>
                         <li class="flex items-center">
-                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-[#ea8d00]"></i>
+                            <i class="fas fa-envelope mr-3 text-brand-gold"></i>
                             <a href="mailto:kontakt@marek-marek.cz" class="hover:text-white transition">kontakt@marek-marek.cz</a>
                         </li>
                     </ul>
